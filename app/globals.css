@@ -33,6 +33,14 @@ footer[id] {
   scroll-margin-top: 7rem;
 }
 
+div[id].scroll-mt-28 {
+  scroll-margin-top: 7rem;
+}
+
+.section-block {
+  padding-block: clamp(4rem, 8vw, 6rem);
+}
+
 ::selection {
   background: #e7dcc4;
   color: #1c1a17;
