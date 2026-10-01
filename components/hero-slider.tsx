@@ -34,6 +34,9 @@ function slideImageClass(item: (typeof heroSlides)[number]) {
         : "p-3 sm:p-5 lg:p-8";
     return `object-contain object-center ${pad}`;
   }
+  if ("desktopImageFit" in item && item.desktopImageFit === "contain") {
+    return "object-cover object-center lg:object-contain lg:p-8";
+  }
   return "object-cover";
 }
 
@@ -124,8 +127,10 @@ export function HeroSlider() {
             "slideBackground" in item && item.slideBackground === "white"
               ? "bg-white"
               : "bg-paper";
-          const showOverlay =
-            item.showHeroCopy || item.imageFit === "cover";
+          const hasDesktopContain =
+            "desktopImageFit" in item && item.desktopImageFit === "contain";
+          const showOverlay = item.showHeroCopy || item.imageFit === "cover";
+          const overlayResponsive = hasDesktopContain ? "lg:hidden" : "";
 
           return (
           <div key={item.image} className="relative h-full w-full shrink-0">
@@ -148,7 +153,7 @@ export function HeroSlider() {
             </div>
             {showOverlay ? (
             <div
-              className={`absolute inset-0 ${
+              className={`absolute inset-0 ${overlayResponsive} ${
                 item.showHeroCopy
                   ? "bg-gradient-to-t from-black/75 via-black/25 to-black/5"
                   : "bg-gradient-to-t from-black/35 via-transparent to-transparent"
