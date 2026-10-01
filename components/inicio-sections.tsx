@@ -11,9 +11,9 @@ export function InicioSections() {
       <section id="historia" className="section-block scroll-mt-28 border-t border-line bg-background">
         <div className="mx-auto max-w-6xl px-6">
           <SectionHeading
-            eyebrow="Historia"
-            title={`Fundo Montechico — desde ${site.historySince}`}
-            description="Tradición agrícola en el valle y el camino hacia Don Santino."
+            eyebrow={somosCopy.eyebrow}
+            title={somosCopy.title}
+            description={somosCopy.lead}
           />
         </div>
         <div className="mx-auto mt-12 grid max-w-6xl gap-12 px-6 lg:grid-cols-2 lg:items-center">

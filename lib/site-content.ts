@@ -56,43 +56,42 @@ export const navLinks = {
   ],
 } as const;
 
+export const heroBrand = {
+  placeName: "ACHANIZO",
+  tagline: "EL VALLE DE ORO",
+} as const;
+
 export const heroSlides = [
   {
     image: "/hero/fundo.jpg",
     alt: "Fundo Montechico en el valle",
-    title: "Del valle a tu mesa",
-    lines: [
-      "En el fundo Montechico elaboramos aceite de oliva extra virgen",
-      "de aroma equilibrado y calidad pensada para cada hogar peruano.",
-    ],
+    imageFit: "contain" as const,
+    showHeroCopy: true,
   },
   {
     image: "/producto_principal.jpeg",
     alt: "Aceite de oliva extra virgen Don Santino",
-    title: "Don Santino",
-    lines: [
-      "Nuestra línea de aceite de oliva extra virgen,",
-      "extracción en frío desde la aceituna del fundo.",
-    ],
+    imageFit: "contain" as const,
+    showHeroCopy: false,
   },
   {
     image: "/galeria/aceitunas.jpg",
     alt: "Cosecha de aceituna en Fundo Montechico",
-    title: "De la aceituna al aceite",
-    lines: [
-      "Aceituna seleccionada a mano en cosecha,",
-      "base de un extra virgen auténtico.",
-    ],
+    imageFit: "cover" as const,
+    showHeroCopy: false,
   },
 ] as const;
 
 export const somosCopy = {
-  eyebrow: "Historia",
+  eyebrow: "Nuestra historia",
   title: "Fundo Montechico",
+  lead:
+    "Más de un siglo de tradición, una tierra que nos une y un legado familiar que perdura.",
   paragraphs: [
-    `Desde ${site.historySince}, en la ${place.speech}, Fundo Montechico cultiva olivo y elabora aceite de oliva extra virgen. La aceituna se elige en el fundo y el aceite se obtiene solo por presión física, sin mezclas.`,
-    "Cuidamos la calidad desde el vivero hasta el envasado, con procesos pensados para conservar aroma, color y las propiedades de un aceite virgen extra.",
-    "Hoy nuestra línea Don Santino reúne ese trabajo: un aceite auténtico para la mesa y la cocina diaria.",
+    "En el valle de Cháparra, provincia de Caravelí, Arequipa, nace la historia de Fundo Montechico, una tradición familiar que se remonta a 1926, entre tierras fértiles, olivos y el profundo amor por el campo.",
+    "A lo largo de generaciones, hemos cultivado nuestra tierra con dedicación, respeto por la naturaleza y pasión por la agricultura, preservando las raíces y enseñanzas de nuestros antepasados.",
+    "Hoy, honramos ese legado a través de Don Santino, nuestro aceite de oliva extra virgen, elaborado con el compromiso de ofrecer un producto que refleje la esencia de nuestra tierra, la tradición familiar y la calidad de nuestros frutos.",
+    "Fundo Montechico: una tierra, una familia, un legado que perdura.",
   ],
   image: "/galeria/4.jpg",
   imageAlt: "Vista del fundo Montechico",
