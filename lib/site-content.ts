@@ -1,24 +1,35 @@
-/** Formato único de localidad en todo el sitio */
-export const locationFull = "Achanizo - Chaparra - Caravelí - Arequipa - Perú";
+/** Ubicación: encabezado corto, pie legible, texto narrativo aparte */
+export const place = {
+  header: "Achanizo, Arequipa, Perú",
+  /** Pie de página (líneas separadas) */
+  footerLines: [
+    "Achanizo",
+    "Distrito de Chaparra, Provincia de Caravelí",
+    "Departamento de Arequipa, Perú",
+  ],
+  /** Para fichas técnicas / catálogo */
+  productOrigen: "Achanizo, Chaparra, Caravelí, Arequipa, Perú",
+  /** Frase geográfica en textos largos */
+  speech:
+    "localidad de Achanizo, distrito de Chaparra, provincia de Caravelí, departamento de Arequipa",
+} as const;
 
 export const site = {
   name: "Fundo Montechico",
-  tagline: `Aceite de oliva extra virgen · ${locationFull}`,
-  locationLine: locationFull,
+  tagline: "Aceite de oliva extra virgen",
+  locationLine: place.header,
   contact: {
-    /** Edita estos números en lib/site-content.ts */
     phones: [
-      { label: "Teléfono", number: "" },
-      { label: "WhatsApp", number: "", whatsapp: true },
+      { label: "Teléfono", number: "+51 928 551 396" },
+      { label: "WhatsApp", number: "+51 928 551 396", whatsapp: true },
     ],
-    email: "info@fundomontechico.com",
-    address: locationFull,
-    facebookLabel: "Fundo Montechico — Productos Agrícolas",
+    email: "fundomontechico@gmail.com",
+    addressLines: place.footerLines,
+    facebookLabel: "Fundo Montechico",
   },
   social: {
     facebook: "https://www.facebook.com/profile.php?id=61592874851778&locale=es_LA",
-    /** Pega aquí la URL de Instagram del fundo */
-    instagram: "",
+    instagram: "https://www.instagram.com/fundomontechico/",
   },
   map: {
     placeName: "Achanizo",
@@ -34,7 +45,6 @@ export const site = {
   historySince: "1926",
 } as const;
 
-/** Logo e «Inicio» → `/`. Izquierda: anclas al estilo Incahuasi + Catálogo. */
 export const navLinks = {
   primary: [
     { href: "/", label: "Inicio" },
@@ -42,18 +52,36 @@ export const navLinks = {
   ],
   secondary: [
     { href: "/galeria", label: "Galería" },
-    { href: "/contacto", label: "Contacto" },
+    { href: "/#contacto", label: "Contacto" },
   ],
 } as const;
 
 export const heroSlides = [
   {
     image: "/hero/fundo.jpg",
-    alt: `Fundo Montechico · ${locationFull}`,
+    alt: "Fundo Montechico en el valle",
     title: "Del valle a tu mesa",
     lines: [
-      `En ${locationFull} elaboramos un aceite de oliva extra virgen`,
+      "En el fundo Montechico elaboramos aceite de oliva extra virgen",
       "de aroma equilibrado y calidad pensada para cada hogar peruano.",
+    ],
+  },
+  {
+    image: "/producto_principal.jpeg",
+    alt: "Aceite de oliva extra virgen Don Santino",
+    title: "Don Santino",
+    lines: [
+      "Nuestra línea de aceite de oliva extra virgen,",
+      "extracción en frío desde la aceituna del fundo.",
+    ],
+  },
+  {
+    image: "/galeria/aceitunas.jpg",
+    alt: "Cosecha de aceituna en Fundo Montechico",
+    title: "De la aceituna al aceite",
+    lines: [
+      "Aceituna seleccionada a mano en cosecha,",
+      "base de un extra virgen auténtico.",
     ],
   },
 ] as const;
@@ -62,9 +90,9 @@ export const somosCopy = {
   eyebrow: "Historia",
   title: "Fundo Montechico",
   paragraphs: [
-    `Fundo Montechico elabora aceite de oliva extra virgen en ${locationFull}. La aceituna se elige en el fundo y el aceite sale de una presión física, sin mezclas.`,
-    "Cuidamos la calidad desde el cultivo hasta el envasado, con procesos pensados para conservar aroma, color y las propiedades de un aceite de oliva virgen extra.",
-    "Hoy nuestra línea Don Santino representa ese trabajo: un aceite auténtico para la mesa y la cocina diaria.",
+    `Desde ${site.historySince}, en la ${place.speech}, Fundo Montechico cultiva olivo y elabora aceite de oliva extra virgen. La aceituna se elige en el fundo y el aceite se obtiene solo por presión física, sin mezclas.`,
+    "Cuidamos la calidad desde el vivero hasta el envasado, con procesos pensados para conservar aroma, color y las propiedades de un aceite virgen extra.",
+    "Hoy nuestra línea Don Santino reúne ese trabajo: un aceite auténtico para la mesa y la cocina diaria.",
   ],
   image: "/galeria/4.jpg",
   imageAlt: "Vista del fundo Montechico",
@@ -74,7 +102,8 @@ export const timelineEvents = [
   {
     year: "En el valle",
     title: "Achanizo y Chaparra",
-    description: `El trabajo agrícola se concentra en ${locationFull}, donde el vivero y el fundo Montechico desarrollan el cultivo del olivo.`,
+    description:
+      "El trabajo agrícola se concentra en la localidad de Achanizo, donde el vivero y el fundo Montechico desarrollan el cultivo del olivo.",
   },
   {
     year: "Vivero",
@@ -111,7 +140,7 @@ export const timelineEvents = [
 export const ubicacionCopy = {
   eyebrow: "Ubicación",
   title: "Achanizo",
-  intro: `Nuestro fundo se desarrolla en Achanizo, ${locationFull}. El entorno costero-desértico del sur peruano, con valles fértiles irrigados, favorece cultivos como el olivo y define el carácter de nuestros productos.`,
+  intro: `Nuestro fundo está en la ${place.speech}. El clima seco de los valles costeros de Arequipa y la irrigación del valle favorecen el olivo y marcan el carácter de nuestros productos.`,
   features: [
     {
       title: "Suelo",
@@ -138,24 +167,29 @@ export const ubicacionCopy = {
 
 export const galleryItems = [
   {
+    src: "/galeria/aceitunas.jpg",
+    alt: "Aceituna recién cosechada en Fundo Montechico",
+    caption: "Cosecha de aceituna",
+  },
+  {
     src: "/galeria/1.jpg",
-    alt: "Fundo Montechico — imagen 1",
-    caption: locationFull,
+    alt: "Valle de Chaparra",
+    caption: "Foto del valle",
   },
   {
     src: "/galeria/3.jpg",
-    alt: "Fundo Montechico — imagen 3",
-    caption: "Cultivo de olivo",
+    alt: "Cultivo de olivo",
+    caption: "Olivar",
   },
   {
     src: "/galeria/4.jpg",
-    alt: "Fundo Montechico — imagen 4",
-    caption: "El fundo",
+    alt: "Vista del fundo",
+    caption: "En el fundo",
   },
   {
     src: "/galeria/5.jpg",
-    alt: "Fundo Montechico — imagen 5",
-    caption: "Tradición agrícola",
+    alt: "Tradición agrícola",
+    caption: "Nuestro trabajo",
   },
 ] as const;
 

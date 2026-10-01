@@ -17,7 +17,7 @@ const bodoni = Bodoni_Moda({
 export const metadata: Metadata = {
   title: "Fundo Montechico | Aceite de Oliva Extra Virgen",
   description:
-    "Aceite de oliva extra virgen de extracción en frío. Achanizo - Chaparra - Caravelí - Arequipa - Perú.",
+    "Aceite de oliva extra virgen de extracción en frío. Fundo Montechico, valle de Chaparra, Arequipa.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

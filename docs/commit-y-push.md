@@ -74,7 +74,7 @@ Debe decir *Your branch is up to date with 'origin/main'*.
 
 Muchos datos viven en **`lib/site-content.ts`**:
 
-- Localidad: `locationFull`
+- Localidad: objeto `place` (`header`, `footerLines`, `speech`)
 - Teléfonos: `contact.phones`
 - Instagram: `social.instagram`
 - Mapa: `site.map`

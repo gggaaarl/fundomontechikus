@@ -5,10 +5,11 @@ import { useState } from "react";
 import { ContactForm } from "@/components/contact-form";
 import { NutritionPanel } from "@/components/nutrition-panel";
 import { Timeline } from "@/components/timeline";
+import { place } from "@/lib/site-content";
 
 const details = [
   ["Nombre", "Aceite de Oliva Extra Virgen Don Santino"],
-  ["Origen", "Achanizo - Chaparra - Caravelí - Arequipa - Perú"],
+  ["Origen", place.productOrigen],
   ["Ingredientes", "100% aceite de oliva extra virgen"],
   ["Extracción", "En frío — primera prensada"],
   ["Acidez", "≤ 0,3%"],
