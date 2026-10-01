@@ -83,4 +83,10 @@ Ajustes de altura del hero: constante `HERO_HEIGHT` en **`components/hero-slider
 
 ## Referencia de diseño
 
-Inspiración general: [Fundo Incahuasi](https://fundoincahuasi.com/) (proporción hero móvil ~above the fold, menú verde, ornamento línea–puntos–línea).
+Inspiración general: [Fundo Incahuasi](https://fundoincahuasi.com/). Análisis comparativo: `docs/analisis-diseno-referencias.md`.
+
+## Página Salud (`/salud`)
+
+- Contenido: `saludCopy` en `lib/site-content.ts` (8 beneficios).
+- Layout: `components/salud-benefit-rows.tsx` — filas alternadas imagen/texto (par = imagen izquierda).
+- Menú: enlace «Salud» en `navLinks.secondary`.

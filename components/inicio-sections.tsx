@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { ChaparraMapSection } from "@/components/chaparra-map-section";
-import { FeatureGrid } from "@/components/feature-grid";
 import { SectionHeading } from "@/components/section-heading";
-import { site, somosCopy, ubicacionCopy } from "@/lib/site-content";
+import { site, somosCopy } from "@/lib/site-content";
 
 /** Secciones de la página de inicio (misma URL que el logo y el menú «Inicio»). */
 export function InicioSections() {
@@ -41,12 +40,6 @@ export function InicioSections() {
       <div id="ubicacion" className="scroll-mt-28">
         <ChaparraMapSection />
       </div>
-
-      <section className="section-block border-t border-line bg-background">
-        <div className="mx-auto max-w-6xl px-6">
-          <FeatureGrid features={ubicacionCopy.features} />
-        </div>
-      </section>
 
       <section id="video" className="section-block scroll-mt-28 border-t border-line bg-paper">
         <div className="mx-auto max-w-5xl px-6">

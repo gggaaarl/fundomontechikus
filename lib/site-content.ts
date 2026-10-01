@@ -52,6 +52,7 @@ export const navLinks = {
   ],
   secondary: [
     { href: "/galeria", label: "Galería" },
+    { href: "/salud", label: "Salud" },
     { href: "/#contacto", label: "Contacto" },
   ],
 } as const;
@@ -163,6 +164,71 @@ export const ubicacionCopy = {
       title: "Proceso",
       description:
         "Desde la cosecha hasta el envasado, controlamos etapas clave para mantener la calidad sanitaria y organoléptica.",
+    },
+  ],
+} as const;
+
+export const saludCopy = {
+  eyebrow: "Salud",
+  title: "Beneficios del aceite de oliva",
+  intro:
+    "El aceite de oliva extra virgen, como Don Santino, aporta nutrientes y compuestos bioactivos cuando forma parte de una alimentación equilibrada. Estos son algunos de los beneficios asociados a su consumo moderado.",
+  benefits: [
+    {
+      title: "Vitamina E",
+      description:
+        "Actúa como antioxidante natural que ayuda a proteger las células del estrés oxidativo, contribuyendo al cuidado general del organismo.",
+      image: "/producto_principal.jpeg",
+      imageAlt: "Botella de aceite Don Santino",
+    },
+    {
+      title: "Ácidos grasos monoinsaturados",
+      description:
+        "Componente característico del aceite de oliva; en el marco de una dieta variada pueden ayudar a cuidar la salud cardiovascular.",
+      image: "/galeria/aceitunas.jpg",
+      imageAlt: "Aceituna recién cosechada",
+    },
+    {
+      title: "Vitamina A",
+      description:
+        "Contribuye al mantenimiento de mucosas y piel, y participa en el funcionamiento normal del sistema inmunológico.",
+      image: "/hero/fundo.jpg",
+      imageAlt: "Olivos en el fundo Montechico",
+    },
+    {
+      title: "Colesterol HDL y LDL",
+      description:
+        "Un estilo de vida saludable con grasas de calidad puede favorecer un equilibrio entre el colesterol «bueno» (HDL) y el «malo» (LDL).",
+      image: "/producto/etiqueta-y-tabla-nutricional.jpg",
+      imageAlt: "Información nutricional del producto",
+    },
+    {
+      title: "Vitamina K",
+      description:
+        "Interviene en procesos normales de coagulación sanguínea y en el metabolismo óseo.",
+      image: "/galeria/1.jpg",
+      imageAlt: "Valle de Chaparra",
+    },
+    {
+      title: "Propiedades antiinflamatorias",
+      description:
+        "Compuestos fenólicos del aceite virgen pueden apoyar el bienestar digestivo y reducir molestias leves como hinchazón o gases.",
+      image: "/galeria/3.jpg",
+      imageAlt: "Cultivo de olivo",
+    },
+    {
+      title: "Piel, uñas y cabello",
+      description:
+        "Grasas saludables y antioxidantes del aceite de oliva se usan tradicionalmente en rutinas que buscan hidratación y cuidado externo.",
+      image: "/galeria/5.jpg",
+      imageAlt: "Trabajo en el fundo",
+    },
+    {
+      title: "Vitamina D y calcio",
+      description:
+        "La vitamina D favorece la absorción de calcio y fósforo, minerales importantes para huesos y dientes.",
+      image: "/galeria/4.jpg",
+      imageAlt: "Paisaje del fundo",
     },
   ],
 } as const;
