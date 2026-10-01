@@ -135,7 +135,7 @@ export function HeroSlider() {
             "slideBackground" in item && item.slideBackground === "white"
               ? "bg-white"
               : "bg-paper";
-          const showOverlay = item.showHeroCopy || item.imageFit === "cover";
+          const showOverlay = !item.showHeroCopy && item.imageFit === "cover";
 
           return (
           <div key={item.image} className="relative h-full w-full shrink-0">
@@ -154,11 +154,7 @@ export function HeroSlider() {
             </div>
             {showOverlay ? (
             <div
-              className={`absolute inset-0 ${
-                item.showHeroCopy
-                  ? "bg-gradient-to-t from-black/75 via-black/25 to-black/5"
-                  : "bg-gradient-to-t from-black/35 via-transparent to-transparent"
-              }`}
+              className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"
             />
             ) : null}
           </div>
@@ -174,10 +170,10 @@ export function HeroSlider() {
       >
         {showCopy ? (
           <>
-            <p className="font-display text-3xl tracking-[0.06em] text-paper uppercase italic sm:text-4xl lg:text-5xl">
+            <p className="font-display text-3xl tracking-[0.06em] text-paper uppercase italic drop-shadow-[0_2px_14px_rgba(0,0,0,0.55)] sm:text-4xl lg:text-5xl">
               {heroBrand.placeName}
             </p>
-            <p className="mt-2 font-sans text-[12px] tracking-[0.22em] text-paper/95 uppercase sm:text-[13px]">
+            <p className="mt-2 font-sans text-[12px] tracking-[0.22em] text-paper/95 uppercase drop-shadow-[0_1px_10px_rgba(0,0,0,0.5)] sm:text-[13px]">
               {heroBrand.tagline}
             </p>
             <div className="mt-4">

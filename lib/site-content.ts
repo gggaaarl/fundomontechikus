@@ -184,11 +184,6 @@ export const galleryItems = [
     caption: "Olivar",
   },
   {
-    src: "/galeria/4.jpg",
-    alt: "Vista del fundo",
-    caption: "En el fundo",
-  },
-  {
     src: "/galeria/5.jpg",
     alt: "Tradición agrícola",
     caption: "Nuestro trabajo",

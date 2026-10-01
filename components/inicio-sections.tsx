@@ -12,14 +12,14 @@ export function InicioSections() {
         id="historia"
         className="scroll-mt-28 border-t border-line bg-background pt-10 pb-16 sm:pt-12 sm:pb-20 lg:py-[clamp(4rem,8vw,6rem)]"
       >
-        <div className="mx-auto max-w-6xl px-6 pb-[min(14vh,6rem)] lg:pb-0">
+        <div className="mx-auto max-w-6xl px-6 pb-[min(18vh,7.5rem)] lg:pb-0">
           <SectionHeading
             eyebrow={somosCopy.eyebrow}
             title={somosCopy.title}
             description={somosCopy.lead}
           />
         </div>
-        <div className="mx-auto mt-2 grid max-w-6xl gap-12 px-6 sm:mt-4 lg:mt-12 lg:grid-cols-2 lg:items-center">
+        <div className="mx-auto mt-0 grid max-w-6xl gap-12 px-6 lg:mt-12 lg:grid-cols-2 lg:items-center">
           <div className="space-y-6 font-sans text-lg leading-relaxed text-ink/80">
             {somosCopy.paragraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 48)}>{paragraph}</p>

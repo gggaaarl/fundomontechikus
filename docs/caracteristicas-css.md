@@ -52,7 +52,7 @@ Fondo del carrusel: `bg-paper` (crema), no verde.
 
 | Slide | Imagen | Comportamiento |
 |-------|--------|----------------|
-| 1 Fundo | `/hero/fundo.jpg` | Clase **`.hero-slide-fundo`** en `globals.css`: móvil `object-fit: contain`, `object-position: left center`; desktop `cover`, `center 38%`. Texto: ACHANIZO + «En el valle de oro» + ornamento. |
+| 1 Fundo | `/hero/fundo.jpg` | Clase **`.hero-slide-fundo`**: `cover` a altura completa; móvil `object-position: 22% center`; desktop `center 38%`. **Sin degradado** en slide 1; texto con `drop-shadow`. |
 | 2 Producto | `/producto_principal.jpeg` | `object-contain`, fondo **`bg-white`**, sin degradado verde/oscuro extra. |
 | 3 Aceitunas | `/galeria/aceitunas.jpg` | `object-cover` a **ancho completo** en todos los breakpoints; `object-position: center 42%`. Degradado inferior suave. |
 
@@ -73,6 +73,13 @@ Interacción: swipe horizontal (~56px umbral), autoplay 7s, bolitas blancas.
 Textos, rutas del slider y contacto: **`lib/site-content.ts`**.  
 Colores y reglas del slide 1: **`app/globals.css`**.  
 Ajustes de altura del hero: constante `HERO_HEIGHT` en **`components/hero-slider.tsx`**.
+
+## Galería (`components/gallery-grid.tsx`)
+
+- **Sin pies** bajo cada foto (captions retirados de la UI).
+- **Móvil:** grid igual (`object-contain`, altura mínima); **tap** abre lightbox a pantalla completa.
+- **Desktop (`lg+`):** celdas `aspect-[4/3]`, `object-cover`; **hover** oscurece ~30% + leve zoom; **click** abre la misma galería ampliada.
+- **Lightbox:** fondo oscuro, contador `n / total`, flechas, tecla Escape y ← →, bloqueo de scroll; cierre al pulsar fuera de la imagen.
 
 ## Referencia de diseño
 

@@ -84,14 +84,16 @@ function FooterLink({ href, label, children, external, icon: Icon }: FooterLinkP
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className="group flex items-center gap-3 transition-colors hover:text-gold"
+      className="group flex w-full max-w-xs items-center justify-center gap-3 transition-colors hover:text-gold md:max-w-none md:justify-start"
     >
       <Icon className="size-5 shrink-0 text-paper group-hover:text-gold" />
-      <span className="min-w-0 text-left">
+      <span className="min-w-0 text-center md:text-left">
         <span className="block text-[11px] tracking-[0.18em] text-paper/60 uppercase group-hover:text-gold/80">
           {label}
         </span>
-        <span className="mt-0.5 block text-sm text-paper/90 group-hover:text-gold">{children}</span>
+        <span className="mt-0.5 block break-all text-sm text-paper/90 group-hover:text-gold sm:break-normal">
+          {children}
+        </span>
       </span>
     </a>
   );
@@ -126,7 +128,7 @@ export function SiteFooter() {
           </div>
 
           <nav
-            className="flex flex-col items-center gap-5 font-sans md:items-start"
+            className="flex w-full flex-col items-center gap-5 font-sans md:w-auto md:items-start"
             aria-label="Contacto y redes"
           >
             <FooterLink href={`mailto:${site.contact.email}`} label="Email" icon={MailIcon}>
