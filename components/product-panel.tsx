@@ -8,7 +8,7 @@ import { Timeline } from "@/components/timeline";
 
 const details = [
   ["Nombre", "Aceite de Oliva Extra Virgen Don Santino"],
-  ["Origen", "Valle de Chaparra, Caravelí, Arequipa, Perú"],
+  ["Origen", "Achanizo - Chaparra - Caravelí - Arequipa - Perú"],
   ["Ingredientes", "100% aceite de oliva extra virgen"],
   ["Extracción", "En frío — primera prensada"],
   ["Acidez", "≤ 0,3%"],

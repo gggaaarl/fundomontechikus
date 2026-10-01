@@ -1,21 +1,37 @@
+/** Formato único de localidad en todo el sitio */
+export const locationFull = "Achanizo - Chaparra - Caravelí - Arequipa - Perú";
+
 export const site = {
   name: "Fundo Montechico",
-  tagline: "Aceite de oliva extra virgen del Valle de Chaparra",
-  locationLine: "Valle de Chaparra, Arequipa",
+  tagline: `Aceite de oliva extra virgen · ${locationFull}`,
+  locationLine: locationFull,
   contact: {
-    phone: "",
-    whatsapp: "",
+    /** Edita estos números en lib/site-content.ts */
+    phones: [
+      { label: "Teléfono", number: "" },
+      { label: "WhatsApp", number: "", whatsapp: true },
+    ],
     email: "info@fundomontechico.com",
-    address: "Valle de Chaparra, Arequipa, Perú",
+    address: locationFull,
     facebookLabel: "Fundo Montechico — Productos Agrícolas",
   },
   social: {
     facebook: "https://www.facebook.com/profile.php?id=61592874851778&locale=es_LA",
+    /** Pega aquí la URL de Instagram del fundo */
+    instagram: "",
+  },
+  map: {
+    placeName: "Achanizo",
+    googleMapsUrl:
+      "https://www.google.com/maps/place/Achanizo+04580/@-15.8051589,-73.968182,15z/data=!3m1!4b1!4m6!3m5!1s0x91156468d157cd2d:0xdb45b4c3bb3b2090!8m2!3d-15.8041366!4d-73.9652965!16s%2Fg%2F1trchh8s?entry=ttu",
+    embedUrl:
+      "https://maps.google.com/maps?q=-15.8041366,-73.9652965&hl=es&z=15&output=embed",
   },
   video: {
     title: "CHAPARRA ACHANIZO VIVERO FUNDO MONTECHICO",
     embedUrl: "https://www.youtube.com/embed/NGp9IKwggiI",
   },
+  historySince: "1926",
 } as const;
 
 /** Logo e «Inicio» → `/`. Izquierda: anclas al estilo Incahuasi + Catálogo. */
@@ -30,14 +46,13 @@ export const navLinks = {
   ],
 } as const;
 
-/** Hero de la portada (`/`). Archivo: `public/hero/fundo.jpg` ← `foto_fundo.jpg` */
 export const heroSlides = [
   {
     image: "/hero/fundo.jpg",
-    alt: "Fundo Montechico en el Valle de Chaparra",
+    alt: `Fundo Montechico · ${locationFull}`,
     title: "Del valle a tu mesa",
     lines: [
-      "En el Valle de Chaparra elaboramos un aceite de oliva extra virgen",
+      `En ${locationFull} elaboramos un aceite de oliva extra virgen`,
       "de aroma equilibrado y calidad pensada para cada hogar peruano.",
     ],
   },
@@ -47,11 +62,10 @@ export const somosCopy = {
   eyebrow: "Historia",
   title: "Fundo Montechico",
   paragraphs: [
-    "Fundo Montechico elabora aceite de oliva extra virgen en el Valle de Chaparra, Arequipa. La aceituna se elige en el fundo y el aceite sale de una presión física, sin mezclas.",
+    `Fundo Montechico elabora aceite de oliva extra virgen en ${locationFull}. La aceituna se elige en el fundo y el aceite sale de una presión física, sin mezclas.`,
     "Cuidamos la calidad desde el cultivo hasta el envasado, con procesos pensados para conservar aroma, color y las propiedades de un aceite de oliva virgen extra.",
     "Hoy nuestra línea Don Santino representa ese trabajo: un aceite auténtico para la mesa y la cocina diaria.",
   ],
-  /** Archivo: `public/galeria/4.jpg` ← `foto_galeria4.jpg` */
   image: "/galeria/4.jpg",
   imageAlt: "Vista del fundo Montechico",
 } as const;
@@ -59,9 +73,8 @@ export const somosCopy = {
 export const timelineEvents = [
   {
     year: "En el valle",
-    title: "Chaparra y Achanizo",
-    description:
-      "El trabajo agrícola se concentra en el Valle de Chaparra, Arequipa, donde el vivero y el fundo Montechico desarrollan el cultivo del olivo.",
+    title: "Achanizo y Chaparra",
+    description: `El trabajo agrícola se concentra en ${locationFull}, donde el vivero y el fundo Montechico desarrollan el cultivo del olivo.`,
   },
   {
     year: "Vivero",
@@ -97,9 +110,8 @@ export const timelineEvents = [
 
 export const ubicacionCopy = {
   eyebrow: "Ubicación",
-  title: "Valle de Chaparra",
-  intro:
-    "Nuestro fundo se desarrolla en el Valle de Chaparra, en la región Arequipa. El entorno costero-desértico del sur peruano, con valles fértiles irrigados, favorece cultivos como el olivo y define el carácter de nuestros productos.",
+  title: "Achanizo",
+  intro: `Nuestro fundo se desarrolla en Achanizo, ${locationFull}. El entorno costero-desértico del sur peruano, con valles fértiles irrigados, favorece cultivos como el olivo y define el carácter de nuestros productos.`,
   features: [
     {
       title: "Suelo",
@@ -128,7 +140,7 @@ export const galleryItems = [
   {
     src: "/galeria/1.jpg",
     alt: "Fundo Montechico — imagen 1",
-    caption: "Valle de Chaparra",
+    caption: locationFull,
   },
   {
     src: "/galeria/3.jpg",
@@ -151,7 +163,7 @@ export const homeTeasers = [
   {
     href: "/#historia",
     title: "Historia",
-    description: "Conoce el fundo, el valle y nuestro recorrido en Chaparra.",
+    description: "Conoce el fundo y nuestro recorrido desde 1926.",
   },
   {
     href: "/catalogo",
@@ -165,5 +177,4 @@ export const homeTeasers = [
   },
 ] as const;
 
-/** Fondo del mapa en Historia (`public/galeria/3.jpg`). */
 export const mapSectionBackground = "/galeria/3.jpg";

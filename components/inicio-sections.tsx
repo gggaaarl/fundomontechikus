@@ -12,8 +12,8 @@ export function InicioSections() {
         <div className="mx-auto max-w-6xl px-6">
           <SectionHeading
             eyebrow="Historia"
-            title="Fundo Montechico"
-            description="Tradición agrícola en el Valle de Chaparra y el camino hacia Don Santino."
+            title={`Fundo Montechico — desde ${site.historySince}`}
+            description="Tradición agrícola en el valle y el camino hacia Don Santino."
           />
         </div>
         <div className="mx-auto mt-12 grid max-w-6xl gap-12 px-6 lg:grid-cols-2 lg:items-center">
@@ -50,7 +50,7 @@ export function InicioSections() {
           <SectionHeading
             eyebrow="Video"
             title="Conoce el fundo"
-            description="Un recorrido por nuestro vivero y el Valle de Chaparra."
+            description="Un recorrido por nuestro vivero y el fundo."
           />
           <div className="mt-12 aspect-video w-full overflow-hidden">
             <iframe

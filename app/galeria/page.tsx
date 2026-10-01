@@ -7,7 +7,7 @@ export default function GaleriaPage() {
       <PageBanner
         eyebrow="Galería"
         title="Imágenes del fundo"
-        description="Olivar, producto y paisajes del Valle de Chaparra."
+        description="Imágenes del fundo y del valle."
       />
       <section className="section-block bg-background">
         <div className="mx-auto max-w-7xl px-6">
