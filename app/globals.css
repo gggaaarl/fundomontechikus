@@ -56,6 +56,19 @@ div[id].scroll-mt-28 {
   animation: hero-copy-in 0.9s ease-out both;
 }
 
+/** Slide 1: móvil = foto contenida alineada a la izquierda (sol); desktop = cover */
+.hero-slide-fundo {
+  object-fit: contain;
+  object-position: left center;
+}
+
+@media (min-width: 1024px) {
+  .hero-slide-fundo {
+    object-fit: cover;
+    object-position: center 38%;
+  }
+}
+
 @media (max-width: 1023px) {
   section[id],
   footer[id],

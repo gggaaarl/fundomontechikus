@@ -81,8 +81,7 @@ export const heroSlides = [
     image: "/galeria/aceitunas.jpg",
     alt: "Cosecha de aceituna en Fundo Montechico",
     imageFit: "cover" as const,
-    desktopImageFit: "contain" as const,
-    objectPosition: "center",
+    objectPosition: "center 42%",
     showHeroCopy: false,
   },
 ] as const;

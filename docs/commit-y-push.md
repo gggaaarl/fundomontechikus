@@ -7,6 +7,8 @@ Para subir cambios al repositorio **sin usar el asistente de IA** (y ahorrar cr�
 - Git instalado
 - Acceso al remoto (GitHub: `origin`)
 
+Después del deploy, la guía de estilos está en `docs/caracteristicas-css.md`.
+
 ## Pasos (PowerShell o terminal)
 
 Desde la carpeta del proyecto:

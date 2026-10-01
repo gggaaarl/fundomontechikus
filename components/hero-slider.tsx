@@ -2,15 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { heroBrand, heroSlides } from "@/lib/site-content";
 
 const SWIPE_THRESHOLD = 56;
 const AUTO_MS = 7000;
 
-/** Altura tipo Incahuasi móvil (~45% viewport), un poco más en desktop */
+/** Altura hero: más baja en móvil para encuadre del slide 1 (sol a la izquierda) */
 const HERO_HEIGHT =
-  "h-[44svh] max-h-[420px] min-h-[220px] sm:h-[46svh] sm:max-h-[460px] lg:h-[56vh] lg:max-h-[560px]";
+  "h-[38svh] max-h-[360px] min-h-[200px] sm:h-[42svh] sm:max-h-[400px] lg:h-[56vh] lg:max-h-[560px]";
 
 function HeroOrnament() {
   return (
@@ -27,6 +27,9 @@ function HeroOrnament() {
 }
 
 function slideImageClass(item: (typeof heroSlides)[number]) {
+  if (item.image === "/hero/fundo.jpg") {
+    return "hero-slide-fundo";
+  }
   if (item.imageFit === "contain") {
     const pad =
       "slideBackground" in item && item.slideBackground === "white"
@@ -34,10 +37,15 @@ function slideImageClass(item: (typeof heroSlides)[number]) {
         : "p-3 sm:p-5 lg:p-8";
     return `object-contain object-center ${pad}`;
   }
-  if ("desktopImageFit" in item && item.desktopImageFit === "contain") {
-    return "object-cover object-center lg:object-contain lg:p-8";
+  return "object-cover object-center";
+}
+
+function slideImageStyle(item: (typeof heroSlides)[number]): CSSProperties | undefined {
+  if (item.image === "/hero/fundo.jpg") return undefined;
+  if (item.imageFit === "cover" && "objectPosition" in item) {
+    return { objectPosition: item.objectPosition };
   }
-  return "object-cover";
+  return undefined;
 }
 
 export function HeroSlider() {
@@ -127,10 +135,7 @@ export function HeroSlider() {
             "slideBackground" in item && item.slideBackground === "white"
               ? "bg-white"
               : "bg-paper";
-          const hasDesktopContain =
-            "desktopImageFit" in item && item.desktopImageFit === "contain";
           const showOverlay = item.showHeroCopy || item.imageFit === "cover";
-          const overlayResponsive = hasDesktopContain ? "lg:hidden" : "";
 
           return (
           <div key={item.image} className="relative h-full w-full shrink-0">
@@ -141,11 +146,7 @@ export function HeroSlider() {
                 fill
                 priority={item.image === heroSlides[0].image}
                 className={slideImageClass(item)}
-                style={
-                  item.imageFit === "cover" && "objectPosition" in item
-                    ? { objectPosition: item.objectPosition }
-                    : undefined
-                }
+                style={slideImageStyle(item)}
                 sizes="100vw"
                 quality={90}
                 draggable={false}
@@ -153,7 +154,7 @@ export function HeroSlider() {
             </div>
             {showOverlay ? (
             <div
-              className={`absolute inset-0 ${overlayResponsive} ${
+              className={`absolute inset-0 ${
                 item.showHeroCopy
                   ? "bg-gradient-to-t from-black/75 via-black/25 to-black/5"
                   : "bg-gradient-to-t from-black/35 via-transparent to-transparent"
