@@ -53,8 +53,19 @@ export const navLinks = {
   secondary: [
     { href: "/galeria", label: "Galería" },
     { href: "/salud", label: "Salud" },
-    { href: "/#contacto", label: "Contacto" },
   ],
+} as const;
+
+export const catalogProduct = {
+  breadcrumbs: [
+    { label: "Productos", href: "/catalogo" },
+    { label: "Aceite de oliva", href: "/catalogo" },
+    { label: "Aceite de Oliva Extra Virgen", href: "/catalogo" },
+  ],
+  title: "Aceite de Oliva Extra Virgen Don Santino",
+  inStockLabel: "En stock",
+  image: "/producto_principal.jpeg",
+  imageAlt: "Botella de Aceite de Oliva Extra Virgen Don Santino Fundo Montechico",
 } as const;
 
 export const heroBrand = {

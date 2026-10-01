@@ -1,14 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { ContactForm } from "@/components/contact-form";
-import { NutritionPanel } from "@/components/nutrition-panel";
-import { Timeline } from "@/components/timeline";
-import { place } from "@/lib/site-content";
+import { catalogProduct, place } from "@/lib/site-content";
 
 const details = [
-  ["Nombre", "Aceite de Oliva Extra Virgen Don Santino"],
+  ["Nombre", catalogProduct.title],
   ["Origen", place.productOrigen],
   ["Ingredientes", "100% aceite de oliva extra virgen"],
   ["Extracción", "En frío — primera prensada"],
@@ -20,31 +19,117 @@ const details = [
   ["Presentación", "1 L (consultar otras presentaciones)"],
 ];
 
+function ProductImageLightbox({ open, onClose }: { open: boolean; onClose: () => void }) {
+  useEffect(() => {
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex flex-col bg-[#1a1a18]/95"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Imagen del producto ampliada"
+      onClick={onClose}
+    >
+      <div className="flex shrink-0 justify-end px-4 py-3 sm:px-6" onClick={(event) => event.stopPropagation()}>
+        <button
+          type="button"
+          onClick={onClose}
+          className="rounded-sm p-2 text-paper/90 transition-colors hover:bg-white/10"
+          aria-label="Cerrar"
+        >
+          <svg className="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+            <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
+      <div
+        className="relative mx-auto flex min-h-0 flex-1 w-full max-w-3xl items-center justify-center px-6 pb-10"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="relative h-full max-h-[min(78vh,900px)] w-full">
+          <Image
+            src={catalogProduct.image}
+            alt={catalogProduct.imageAlt}
+            fill
+            className="object-contain"
+            sizes="100vw"
+            quality={92}
+            priority
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ProductPanel() {
-  const [open, setOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+  const [imageOpen, setImageOpen] = useState(false);
 
   return (
     <>
+      <nav
+        aria-label="Ruta de navegación"
+        className="border-b border-line bg-[#e8e6e2] font-sans text-[13px] text-ink/75"
+      >
+        <ol className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-2 gap-y-1 px-6 py-3">
+          {catalogProduct.breadcrumbs.map((crumb, index) => (
+            <li key={crumb.label} className="flex items-center gap-2">
+              {index > 0 ? (
+                <span className="text-ink/40" aria-hidden>
+                  &gt;
+                </span>
+              ) : null}
+              {index < catalogProduct.breadcrumbs.length - 1 ? (
+                <Link href={crumb.href} className="transition-colors hover:text-olive">
+                  {crumb.label}
+                </Link>
+              ) : (
+                <span className="text-ink/90">{crumb.label}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+
       <section id="productos" className="bg-background">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 lg:grid-cols-2 lg:items-start">
-          <div className="relative flex justify-center border border-line bg-white p-4 shadow-sm">
+        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-12 lg:grid-cols-2 lg:items-start lg:py-16">
+          <button
+            type="button"
+            className="group relative flex cursor-zoom-in justify-center border border-line bg-white p-4 shadow-sm lg:cursor-zoom-in"
+            onClick={() => setImageOpen(true)}
+            aria-label="Ampliar imagen del producto"
+          >
             <Image
-              src="/producto_principal.jpeg"
-              alt="Botella de Aceite de Oliva Extra Virgen Don Santino Fundo Montechico"
+              src={catalogProduct.image}
+              alt={catalogProduct.imageAlt}
               width={900}
               height={1100}
               priority
-              className="h-auto w-full max-w-md object-contain mix-blend-multiply"
+              className="h-auto w-full max-w-md object-contain mix-blend-multiply transition-opacity duration-300 group-hover:opacity-90"
             />
-          </div>
+            <span className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
+          </button>
 
-          <div>
-            <p className="text-xs font-bold tracking-[0.3em] text-gold uppercase">Productos / Don Santino</p>
-            <h1 className="mt-4 font-display text-4xl leading-tight text-olive uppercase sm:text-5xl">
-              Aceite de Oliva <br />
-              <span className="text-3xl text-gold italic sm:text-4xl">Extra Virgen</span> <br />
-              Don Santino
+          <div className="min-w-0">
+            <h1 className="font-display text-xl leading-snug text-olive uppercase tracking-wide sm:text-2xl">
+              {catalogProduct.title}
             </h1>
+
+            <p className="mt-3 font-sans text-sm font-medium text-[#3d7a4a]">{catalogProduct.inStockLabel}</p>
 
             <div className="mt-6 space-y-4 font-sans text-base leading-relaxed text-ink/80">
               <p>
@@ -67,15 +152,23 @@ export function ProductPanel() {
               </p>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              className="mt-8 border border-olive bg-transparent px-8 py-3 text-[12px] font-medium tracking-[0.22em] text-olive uppercase transition-colors duration-300 hover:bg-olive hover:text-paper"
-            >
-              Solicitar información
-            </button>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/salud"
+                className="border border-olive bg-olive px-6 py-3 text-[11px] font-medium tracking-[0.2em] text-paper uppercase transition-colors duration-300 hover:bg-olive/90"
+              >
+                Información nutricional
+              </Link>
+              <button
+                type="button"
+                onClick={() => setContactOpen(true)}
+                className="border border-olive bg-transparent px-6 py-3 text-[11px] font-medium tracking-[0.2em] text-olive uppercase transition-colors duration-300 hover:bg-olive hover:text-paper"
+              >
+                Solicitar información
+              </button>
+            </div>
 
-            <h2 className="mt-16 font-display text-2xl text-olive">Detalle del producto</h2>
+            <h2 className="mt-14 font-display text-2xl text-olive">Detalle del producto</h2>
             <dl className="mt-4 divide-y divide-line border-y border-line font-sans">
               {details.map(([label, value]) => (
                 <div key={label} className="grid gap-1 py-4 sm:grid-cols-[180px_1fr] sm:gap-6">
@@ -88,25 +181,9 @@ export function ProductPanel() {
         </div>
       </section>
 
-      <NutritionPanel />
+      <ProductImageLightbox open={imageOpen} onClose={() => setImageOpen(false)} />
 
-      <section className="border-t border-line bg-background">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-bold tracking-[0.3em] text-gold uppercase">Nuestro proceso</p>
-            <h2 className="mt-3 font-display text-3xl text-olive uppercase sm:text-4xl">Del olivo a Don Santino</h2>
-            <div className="mx-auto mt-4 h-px w-16 bg-gold" />
-            <p className="mt-6 font-sans text-base text-ink/70">
-              Etapas clave en la elaboración de nuestro aceite de oliva extra virgen.
-            </p>
-          </div>
-          <div className="mt-12">
-            <Timeline />
-          </div>
-        </div>
-      </section>
-
-      {open ? (
+      {contactOpen ? (
         <div
           className="fixed inset-0 z-50 grid place-items-center bg-ink/60 p-4 backdrop-blur-sm"
           role="dialog"
@@ -117,7 +194,7 @@ export function ProductPanel() {
               <h2 className="font-display text-3xl text-olive uppercase">Solicitar información</h2>
               <button
                 type="button"
-                onClick={() => setOpen(false)}
+                onClick={() => setContactOpen(false)}
                 className="text-[12px] tracking-[0.16em] text-ink/60 uppercase transition-colors hover:text-olive"
               >
                 Cerrar
