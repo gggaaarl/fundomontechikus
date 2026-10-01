@@ -8,18 +8,29 @@ import { heroBrand, heroSlides } from "@/lib/site-content";
 const SWIPE_THRESHOLD = 56;
 const AUTO_MS = 7000;
 
+/** Altura tipo Incahuasi móvil (~45% viewport), un poco más en desktop */
+const HERO_HEIGHT =
+  "h-[44svh] max-h-[420px] min-h-[220px] sm:h-[46svh] sm:max-h-[460px] lg:h-[56vh] lg:max-h-[560px]";
+
 function HeroOrnament() {
   return (
-    <div className="flex items-center justify-start gap-3">
-      <span className="h-px w-10 bg-paper/75 sm:w-14" aria-hidden />
-      <span className="flex items-center gap-2" aria-hidden>
-        <span className="size-1.5 rounded-full bg-paper" />
-        <span className="size-1.5 rounded-full bg-paper" />
-        <span className="size-1.5 rounded-full bg-paper" />
+    <div className="flex items-center justify-center gap-3">
+      <span className="h-px w-8 bg-paper/75 sm:w-12" aria-hidden />
+      <span className="flex items-center gap-1.5" aria-hidden>
+        <span className="size-1 rounded-full bg-paper" />
+        <span className="size-1 rounded-full bg-paper" />
+        <span className="size-1 rounded-full bg-paper" />
       </span>
-      <span className="h-px w-10 bg-paper/75 sm:w-14" aria-hidden />
+      <span className="h-px w-8 bg-paper/75 sm:w-12" aria-hidden />
     </div>
   );
+}
+
+function slideImageClass(item: (typeof heroSlides)[number]) {
+  if (item.imageFit === "contain") {
+    return "object-contain object-center p-3 sm:p-5 lg:p-8";
+  }
+  return "object-cover";
 }
 
 export function HeroSlider() {
@@ -32,9 +43,12 @@ export function HeroSlider() {
 
   const slideCount = heroSlides.length;
 
-  const goTo = useCallback((next: number) => {
-    setIndex((next + slideCount) % slideCount);
-  }, [slideCount]);
+  const goTo = useCallback(
+    (next: number) => {
+      setIndex((next + slideCount) % slideCount);
+    },
+    [slideCount],
+  );
 
   const goNext = useCallback(() => goTo(index + 1), [goTo, index]);
   const goPrev = useCallback(() => goTo(index - 1), [goTo, index]);
@@ -88,7 +102,7 @@ export function HeroSlider() {
   return (
     <section
       ref={sectionRef}
-      className="relative touch-pan-y overflow-hidden border-b border-line bg-olive select-none"
+      className={`relative touch-pan-y overflow-hidden border-b border-line bg-paper select-none ${HERO_HEIGHT}`}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -96,26 +110,24 @@ export function HeroSlider() {
       aria-roledescription="carrusel"
     >
       <div
-        className={`flex min-h-[78svh] will-change-transform lg:min-h-[88vh] ${
+        className={`flex h-full will-change-transform ${
           isDragging ? "" : "transition-transform duration-500 ease-out"
         }`}
         style={{ transform: `translateX(${translateX})` }}
       >
         {heroSlides.map((item) => (
-          <div
-            key={item.image}
-            className="relative min-h-[78svh] w-full shrink-0 lg:min-h-[88vh]"
-          >
-            <div className="absolute inset-0 bg-olive">
+          <div key={item.image} className="relative h-full w-full shrink-0">
+            <div className="absolute inset-0 bg-paper">
               <Image
                 src={item.image}
                 alt={item.alt}
                 fill
                 priority={item.image === heroSlides[0].image}
-                className={
-                  item.imageFit === "contain"
-                    ? "object-contain object-center p-4 sm:p-8 lg:p-12"
-                    : "object-cover object-center"
+                className={slideImageClass(item)}
+                style={
+                  item.imageFit === "cover" && "objectPosition" in item
+                    ? { objectPosition: item.objectPosition }
+                    : undefined
                 }
                 sizes="100vw"
                 quality={90}
@@ -125,8 +137,8 @@ export function HeroSlider() {
             <div
               className={`absolute inset-0 ${
                 item.showHeroCopy
-                  ? "bg-gradient-to-t from-olive/90 via-olive/40 to-olive/20"
-                  : "bg-gradient-to-t from-olive/50 via-transparent to-transparent"
+                  ? "bg-gradient-to-t from-black/75 via-black/25 to-black/5"
+                  : "bg-gradient-to-t from-black/35 via-transparent to-transparent"
               }`}
             />
           </div>
@@ -134,32 +146,34 @@ export function HeroSlider() {
       </div>
 
       <div
-        className={`pointer-events-none absolute inset-0 z-20 mx-auto flex max-w-6xl flex-col justify-end px-6 pb-10 pt-24 lg:pb-16 lg:pt-32 ${
+        className={`pointer-events-none absolute inset-0 z-20 mx-auto flex h-full max-w-6xl flex-col items-center justify-end px-5 pb-6 pt-16 text-center sm:pb-8 lg:pb-10 ${
           showCopy ? "animate-hero-copy" : ""
         }`}
         key={showCopy ? `copy-${index}` : "copy-empty"}
       >
         {showCopy ? (
           <>
-            <HeroOrnament />
-            <p className="mt-6 font-display text-4xl tracking-[0.08em] text-paper uppercase sm:text-5xl lg:text-7xl">
+            <p className="font-display text-3xl tracking-[0.06em] text-paper uppercase italic sm:text-4xl lg:text-5xl">
               {heroBrand.placeName}
             </p>
-            <p className="mt-3 text-[13px] tracking-[0.38em] text-paper/95 uppercase sm:text-sm">
+            <p className="mt-2 text-[11px] tracking-[0.32em] text-paper/95 uppercase sm:text-xs lg:text-sm">
               {heroBrand.tagline}
             </p>
-            <div className="pointer-events-auto mt-8 hidden flex-wrap gap-4 sm:flex">
+            <div className="mt-4">
+              <HeroOrnament />
+            </div>
+            <div className="pointer-events-auto mt-5 hidden flex-wrap justify-center gap-3 sm:flex">
               <Link
                 href="/catalogo"
                 onPointerDown={(event) => event.stopPropagation()}
-                className="border border-paper bg-paper/10 px-8 py-3 text-[12px] tracking-[0.22em] text-paper uppercase backdrop-blur-sm transition-colors hover:bg-paper hover:text-olive"
+                className="border border-paper/90 bg-black/20 px-6 py-2.5 text-[11px] tracking-[0.2em] text-paper uppercase backdrop-blur-sm transition-colors hover:bg-paper hover:text-ink"
               >
                 Ver catálogo
               </Link>
               <Link
                 href="/#historia"
                 onPointerDown={(event) => event.stopPropagation()}
-                className="border border-paper/60 px-8 py-3 text-[12px] tracking-[0.22em] text-paper uppercase transition-colors hover:border-paper hover:bg-paper/10"
+                className="border border-paper/60 px-6 py-2.5 text-[11px] tracking-[0.2em] text-paper uppercase transition-colors hover:border-paper hover:bg-black/15"
               >
                 Historia
               </Link>
@@ -167,7 +181,11 @@ export function HeroSlider() {
           </>
         ) : null}
 
-        <div className="pointer-events-auto mt-10 flex items-center gap-3">
+        <div
+          className={`pointer-events-auto flex items-center justify-center gap-2.5 ${
+            showCopy ? "mt-5" : "mt-auto pb-1"
+          }`}
+        >
           {heroSlides.map((_, i) => (
             <button
               key={heroSlides[i].image}
@@ -176,8 +194,8 @@ export function HeroSlider() {
               aria-current={i === index}
               onClick={() => goTo(i)}
               onPointerDown={(event) => event.stopPropagation()}
-              className={`rounded-full transition-all duration-300 ${
-                i === index ? "size-2.5 bg-white" : "size-2 bg-white/45 hover:bg-white/70"
+              className={`rounded-full border border-white/80 transition-all duration-300 ${
+                i === index ? "size-2.5 bg-white" : "size-2 bg-transparent hover:bg-white/30"
               }`}
             />
           ))}

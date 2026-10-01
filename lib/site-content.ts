@@ -65,19 +65,22 @@ export const heroSlides = [
   {
     image: "/hero/fundo.jpg",
     alt: "Fundo Montechico en el valle",
-    imageFit: "contain" as const,
+    imageFit: "cover" as const,
+    objectPosition: "center 38%",
     showHeroCopy: true,
   },
   {
     image: "/producto_principal.jpeg",
     alt: "Aceite de oliva extra virgen Don Santino",
     imageFit: "contain" as const,
+    objectPosition: "center",
     showHeroCopy: false,
   },
   {
     image: "/galeria/aceitunas.jpg",
     alt: "Cosecha de aceituna en Fundo Montechico",
     imageFit: "cover" as const,
+    objectPosition: "center",
     showHeroCopy: false,
   },
 ] as const;
