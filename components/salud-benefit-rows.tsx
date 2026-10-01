@@ -5,13 +5,13 @@ const ROW_MIN_LG = "lg:min-h-[22rem] xl:min-h-[27.5rem]";
 
 function BenefitImage({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className={`relative aspect-[4/3] w-full sm:aspect-[3/2] lg:aspect-auto ${ROW_MIN_LG}`}>
+    <div className={`relative aspect-square w-full lg:aspect-auto ${ROW_MIN_LG}`}>
       <Image
         src={src}
         alt={alt}
         fill
         className="object-cover object-center"
-        sizes="(max-width: 1024px) 100vw, 50vw"
+        sizes="(max-width: 1024px) 50vw, 50vw"
         quality={88}
       />
     </div>
@@ -21,26 +21,26 @@ function BenefitImage({ src, alt }: { src: string; alt: string }) {
 function BenefitText({ title, description }: { title: string; description: string }) {
   return (
     <div
-      className={`flex w-full flex-col items-center justify-center bg-salud-cream px-8 py-12 text-center sm:py-14 lg:px-12 ${ROW_MIN_LG}`}
+      className={`flex aspect-square w-full flex-col items-center justify-center bg-salud-cream px-3 py-5 text-center sm:px-5 lg:aspect-auto lg:px-12 lg:py-14 ${ROW_MIN_LG}`}
     >
-      <h2 className="font-display text-2xl tracking-wide text-ink uppercase sm:text-3xl lg:text-[2rem]">
+      <h2 className="font-display text-2xl leading-tight tracking-wide text-ink uppercase sm:text-3xl lg:text-[2rem]">
         {title}
       </h2>
-      <p className="mt-5 max-w-md font-sans text-base leading-relaxed text-ink/70">
+      <p className="mt-3 max-w-md font-sans text-base leading-snug text-ink/75 sm:mt-4 sm:text-lg lg:leading-relaxed">
         {description}
       </p>
     </div>
   );
 }
 
-/** Cuadrícula tipo El Olivar Beneficios: 50/50 sin gutters, imagen | texto alternado. */
+/** Grid 50/50 en todos los breakpoints (bento); en desktop filas más altas. */
 export function SaludBenefitRows() {
   return (
     <div className="bg-white">
       {saludCopy.benefits.map((item, index) => {
         const imageFirst = index % 2 === 0;
         return (
-          <div key={item.title} className="grid grid-cols-1 lg:grid-cols-2">
+          <div key={item.title} className="grid grid-cols-2">
             {imageFirst ? (
               <>
                 <BenefitImage src={item.image} alt={item.imageAlt} />

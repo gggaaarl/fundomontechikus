@@ -291,19 +291,17 @@ export function ProductPanel() {
           <button
             type="button"
             onClick={openLabel}
-            className="group mx-auto mt-10 block max-w-2xl cursor-zoom-in border border-line bg-white p-3 shadow-sm transition-shadow hover:shadow-md"
+            className="group mx-auto mt-10 block w-full max-w-2xl cursor-zoom-in border border-line bg-white p-3 shadow-sm transition-shadow hover:shadow-md"
             aria-label="Ampliar etiqueta e información nutricional"
           >
-            <div className="relative aspect-[17.5/18.5] w-full overflow-hidden">
-              <Image
-                src={productNutrition.labelImage}
-                alt={productNutrition.labelImageAlt}
-                fill
-                className="object-contain p-2 transition-opacity duration-300 group-hover:opacity-95"
-                sizes="(max-width: 1024px) 100vw, 672px"
-              />
-              <span className="pointer-events-none absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/5" />
-            </div>
+            <Image
+              src={productNutrition.labelImage}
+              alt={productNutrition.labelImageAlt}
+              width={875}
+              height={925}
+              className="mx-auto h-auto w-full max-w-full object-contain p-2 transition-opacity duration-300 group-hover:opacity-95"
+              sizes="(max-width: 1024px) 100vw, 672px"
+            />
           </button>
         </div>
       </section>

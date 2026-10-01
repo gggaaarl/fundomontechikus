@@ -90,8 +90,8 @@ export const heroSlides = [
     showHeroCopy: false,
   },
   {
-    image: "/galeria/aceitunas.jpg",
-    alt: "Cosecha de aceituna en Fundo Montechico",
+    image: "/galeria/3.jpg",
+    alt: "Cultivo de olivo en Fundo Montechico",
     imageFit: "cover" as const,
     objectPosition: "center 42%",
     showHeroCopy: false,
@@ -194,21 +194,21 @@ export const saludCopy = {
     {
       title: "Ácidos grasos",
       description: "Ayudan a reducir el riesgo de sufrir enfermedades del corazón.",
-      image: "/galeria/aceitunas.jpg",
-      imageAlt: "Aceitunas en cosecha",
+      image: "/salud/02-aceitunas-acidos-grasos.jpg",
+      imageAlt: "Aceitunas y alimentación cardiosaludable",
     },
     {
       title: "Vitamina A",
       description:
         "Contribuye a protegernos de diferentes virus, fortaleciendo el sistema inmunológico.",
-      image: "/stock/galeria-almazara.jpg",
-      imageAlt: "Aceite de oliva en almazara",
+      image: "/salud/03-vitamina-a.jpg",
+      imageAlt: "Cocina saludable con aceite de oliva",
     },
     {
       title: "Aumenta el colesterol HDL",
       description: '(Colesterol "bueno") y reduce el LDL (colesterol "malo").',
-      image: "/stock/galeria-olivar.jpg",
-      imageAlt: "Olivar en el fundo",
+      image: "/salud/04-colesterol-hdl.jpg",
+      imageAlt: "Estilo de vida activo y saludable",
     },
     {
       title: "Vitamina K",
@@ -232,8 +232,8 @@ export const saludCopy = {
     {
       title: "Vitamina D",
       description: "Contribuye a la absorción de calcio en el cuerpo.",
-      image: "/stock/hero-olivos.jpg",
-      imageAlt: "Olivos en el valle",
+      image: "/salud/08-vitamina-d.jpg",
+      imageAlt: "Bienestar y naturaleza",
     },
   ],
 } as const;

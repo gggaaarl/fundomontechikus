@@ -16,7 +16,7 @@ Las referencias del rubro ([Incahuasi](https://fundoincahuasi.com/), [El Olivar]
 | Zona | Fondo |
 |------|--------|
 | **Inicio, Catálogo, Galería, Salud** (contenido) | **Blanco** `#ffffff` |
-| **Cabecera** (desktop y móvil, barra logo/menú) | Crema del logo `#faf6f5` (`--header-bg`, `bg-header-bg/95`) |
+| **Cabecera** (desktop y móvil, barra logo/menú) | **Blanco** semitransparente `bg-white/95` (fondo del logo) |
 | **Pie** | Verde oliva `#2c3424` (contraste) |
 | **Menú móvil abierto** | Verde oliva (pantalla completa) |
 | **Celdas de texto en `/salud`** (grid beneficios) | Crema `#fdf7f0` (`--salud-cream`) — excepción tipo El Olivar |
@@ -72,7 +72,7 @@ Patrones habituales:
 ## 5. Cabecera (`components/site-header.tsx`)
 
 - Barra superior desktop: ubicación (`site.locationLine`).
-- Fila principal: **`bg-header-bg/95`**, borde inferior `border-line` (tono alineado al logo).
+- Fila principal: **`bg-white/95`**, borde inferior `border-line`.
 - Desktop: Inicio | Catálogo — logo — Galería | Salud (sin “Contacto” en menú; contacto en pie).
 - Móvil: logo centrado, hamburguesa; overlay `bg-olive`.
 
