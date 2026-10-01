@@ -58,7 +58,7 @@ export const navLinks = {
 
 export const heroBrand = {
   placeName: "ACHANIZO",
-  tagline: "EL VALLE DE ORO",
+  tagline: "En el valle de oro",
 } as const;
 
 export const heroSlides = [
@@ -74,6 +74,7 @@ export const heroSlides = [
     alt: "Aceite de oliva extra virgen Don Santino",
     imageFit: "contain" as const,
     objectPosition: "center",
+    slideBackground: "white" as const,
     showHeroCopy: false,
   },
   {

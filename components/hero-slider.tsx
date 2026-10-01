@@ -28,7 +28,11 @@ function HeroOrnament() {
 
 function slideImageClass(item: (typeof heroSlides)[number]) {
   if (item.imageFit === "contain") {
-    return "object-contain object-center p-3 sm:p-5 lg:p-8";
+    const pad =
+      "slideBackground" in item && item.slideBackground === "white"
+        ? "p-2 sm:p-4"
+        : "p-3 sm:p-5 lg:p-8";
+    return `object-contain object-center ${pad}`;
   }
   return "object-cover";
 }
@@ -115,9 +119,17 @@ export function HeroSlider() {
         }`}
         style={{ transform: `translateX(${translateX})` }}
       >
-        {heroSlides.map((item) => (
+        {heroSlides.map((item) => {
+          const slideBg =
+            "slideBackground" in item && item.slideBackground === "white"
+              ? "bg-white"
+              : "bg-paper";
+          const showOverlay =
+            item.showHeroCopy || item.imageFit === "cover";
+
+          return (
           <div key={item.image} className="relative h-full w-full shrink-0">
-            <div className="absolute inset-0 bg-paper">
+            <div className={`absolute inset-0 ${slideBg}`}>
               <Image
                 src={item.image}
                 alt={item.alt}
@@ -134,6 +146,7 @@ export function HeroSlider() {
                 draggable={false}
               />
             </div>
+            {showOverlay ? (
             <div
               className={`absolute inset-0 ${
                 item.showHeroCopy
@@ -141,8 +154,10 @@ export function HeroSlider() {
                   : "bg-gradient-to-t from-black/35 via-transparent to-transparent"
               }`}
             />
+            ) : null}
           </div>
-        ))}
+          );
+        })}
       </div>
 
       <div
@@ -156,7 +171,7 @@ export function HeroSlider() {
             <p className="font-display text-3xl tracking-[0.06em] text-paper uppercase italic sm:text-4xl lg:text-5xl">
               {heroBrand.placeName}
             </p>
-            <p className="mt-2 text-[11px] tracking-[0.32em] text-paper/95 uppercase sm:text-xs lg:text-sm">
+            <p className="mt-2 font-sans text-[12px] tracking-[0.22em] text-paper/95 uppercase sm:text-[13px]">
               {heroBrand.tagline}
             </p>
             <div className="mt-4">

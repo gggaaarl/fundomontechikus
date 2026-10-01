@@ -130,13 +130,6 @@ export function SiteHeader() {
         </div>
 
         <div className="flex flex-1 flex-col items-center justify-center px-8 pb-16">
-          <Image
-            src="/logo_nuevo.jpeg"
-            alt=""
-            width={120}
-            height={120}
-            className="mb-12 h-16 w-auto object-contain brightness-0 invert"
-          />
           <nav className="flex w-full max-w-xs flex-col gap-6 text-center">
             {allLinks.map((link, i) => (
               <Link
