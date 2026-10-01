@@ -157,6 +157,12 @@ export function HeroSlider() {
               className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"
             />
             ) : null}
+            {item.showHeroCopy ? (
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[58%] bg-gradient-to-t from-black/70 via-black/35 to-transparent"
+                aria-hidden
+              />
+            ) : null}
           </div>
           );
         })}
@@ -170,10 +176,10 @@ export function HeroSlider() {
       >
         {showCopy ? (
           <>
-            <p className="font-display text-3xl tracking-[0.06em] text-paper uppercase italic drop-shadow-[0_2px_14px_rgba(0,0,0,0.55)] sm:text-4xl lg:text-5xl">
+            <p className="font-display text-4xl tracking-[0.06em] text-white uppercase italic drop-shadow-[0_2px_18px_rgba(0,0,0,0.75)] sm:text-5xl lg:text-[3.25rem] lg:leading-tight">
               {heroBrand.placeName}
             </p>
-            <p className="mt-2 font-sans text-[12px] tracking-[0.22em] text-paper/95 uppercase drop-shadow-[0_1px_10px_rgba(0,0,0,0.5)] sm:text-[13px]">
+            <p className="mt-3 font-sans text-sm tracking-[0.22em] text-white uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-base">
               {heroBrand.tagline}
             </p>
             <div className="mt-4">

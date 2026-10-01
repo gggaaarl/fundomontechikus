@@ -16,7 +16,7 @@ Las referencias del rubro ([Incahuasi](https://fundoincahuasi.com/), [El Olivar]
 | Zona | Fondo |
 |------|--------|
 | **Inicio, Catálogo, Galería, Salud** (contenido) | **Blanco** `#ffffff` |
-| **Cabecera** (desktop y móvil, barra logo/menú) | **Blanco** semitransparente `bg-white/95` |
+| **Cabecera** (desktop y móvil, barra logo/menú) | Crema del logo `#faf6f5` (`--header-bg`, `bg-header-bg/95`) |
 | **Pie** | Verde oliva `#2c3424` (contraste) |
 | **Menú móvil abierto** | Verde oliva (pantalla completa) |
 | **Celdas de texto en `/salud`** (grid beneficios) | Crema `#fdf7f0` (`--salud-cream`) — excepción tipo El Olivar |
@@ -31,7 +31,8 @@ No usamos crema global en body: `--background` y `--paper` son **blanco**.
 | Variable | Valor | Clase Tailwind | Uso |
 |----------|--------|----------------|-----|
 | `--background` | `#ffffff` | `bg-background` | `body`, secciones por defecto |
-| `--paper` | `#ffffff` | `bg-paper` | Alias blanco (header legacy, modales claros) |
+| `--paper` | `#ffffff` | `bg-paper` | Alias blanco (modales claros, secciones) |
+| `--header-bg` | `#faf6f5` | `bg-header-bg` | Cabecera (mismo tono que el JPEG del logo) |
 | `--foreground` / `--ink` | `#1c1a17` | `text-ink` | Texto principal |
 | `--olive` | `#2c3424` | `bg-olive`, `text-olive` | Pie, menú móvil, títulos |
 | `--gold` | `#b89a62` | `text-gold`, `bg-gold` | Eyebrows, líneas decorativas |
@@ -62,7 +63,7 @@ Patrones habituales:
 
 ## 4. Layout global
 
-- **`body`:** `min-h-full flex flex-col bg-background text-ink` → columna: header + contenido + footer.
+- **`body`:** `min-h-full flex flex-col bg-background text-ink` → columna: header + contenido + footer; cuerpo **1rem / line-height 1.6** en `globals.css`.
 - **`.section-block`:** `padding-block: clamp(4rem, 8vw, 6rem)`.
 - **Anclas:** `scroll-margin-top: 7rem` (desktop), `5rem` en viewport &lt; 1024px (`section[id]`, `footer#contacto`, `#ubicacion`).
 
@@ -71,7 +72,7 @@ Patrones habituales:
 ## 5. Cabecera (`components/site-header.tsx`)
 
 - Barra superior desktop: ubicación (`site.locationLine`).
-- Fila principal: blanco, borde inferior `border-line`.
+- Fila principal: **`bg-header-bg/95`**, borde inferior `border-line` (tono alineado al logo).
 - Desktop: Inicio | Catálogo — logo — Galería | Salud (sin “Contacto” en menú; contacto en pie).
 - Móvil: logo centrado, hamburguesa; overlay `bg-olive`.
 
@@ -80,7 +81,7 @@ Patrones habituales:
 ## 6. Pie (`components/site-footer.tsx`)
 
 - `bg-olive`, texto `text-paper`.
-- Enlaces con iconos: Email, Teléfono, WhatsApp, Facebook, Instagram.
+- Enlaces con iconos: Email, Teléfono, WhatsApp, Facebook, Instagram. Teléfono/WhatsApp muestran **número principal / 98765043** (enlace `tel`/`wa.me` al principal).
 
 ---
 

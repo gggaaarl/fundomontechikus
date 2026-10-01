@@ -8,6 +8,8 @@
   --gold: #b89a62;
   --paper: #ffffff;
   --line: #e4ddd2;
+  /** Fondo del logo JPEG — solo cabecera */
+  --header-bg: #faf6f5;
   /** Celdas crema solo en grid Salud (referencia El Olivar) */
   --salud-cream: #fdf7f0;
 }
@@ -20,6 +22,7 @@
   --color-gold: var(--gold);
   --color-paper: var(--paper);
   --color-line: var(--line);
+  --color-header-bg: var(--header-bg);
   --color-salud-cream: var(--salud-cream);
   --font-sans: var(--font-outfit);
   --font-display: var(--font-bodoni);
@@ -29,6 +32,16 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-outfit), sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/** Tipografía base por rol */
+.prose-site {
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--ink) 82%, transparent);
 }
 
 section[id],

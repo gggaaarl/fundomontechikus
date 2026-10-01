@@ -20,8 +20,8 @@ export const site = {
   locationLine: place.header,
   contact: {
     phones: [
-      { label: "Teléfono", number: "+51 928 551 396" },
-      { label: "WhatsApp", number: "+51 928 551 396", whatsapp: true },
+      { label: "Teléfono", number: "+51 928 551 396", suffix: "98765043" },
+      { label: "WhatsApp", number: "+51 928 551 396", suffix: "98765043", whatsapp: true },
     ],
     email: "fundomontechico@gmail.com",
     addressLines: place.footerLines,
@@ -194,21 +194,21 @@ export const saludCopy = {
     {
       title: "Ácidos grasos",
       description: "Ayudan a reducir el riesgo de sufrir enfermedades del corazón.",
-      image: "/salud/02-aceitunas-acidos-grasos.jpg",
-      imageAlt: "Aceitunas verdes y negras",
+      image: "/galeria/aceitunas.jpg",
+      imageAlt: "Aceitunas en cosecha",
     },
     {
       title: "Vitamina A",
       description:
         "Contribuye a protegernos de diferentes virus, fortaleciendo el sistema inmunológico.",
-      image: "/salud/03-vitamina-a.jpg",
-      imageAlt: "Aceite de oliva en cocina",
+      image: "/stock/galeria-almazara.jpg",
+      imageAlt: "Aceite de oliva en almazara",
     },
     {
       title: "Aumenta el colesterol HDL",
       description: '(Colesterol "bueno") y reduce el LDL (colesterol "malo").',
-      image: "/salud/04-colesterol-hdl.jpg",
-      imageAlt: "Estilo de vida activo",
+      image: "/stock/galeria-olivar.jpg",
+      imageAlt: "Olivar en el fundo",
     },
     {
       title: "Vitamina K",
@@ -232,8 +232,8 @@ export const saludCopy = {
     {
       title: "Vitamina D",
       description: "Contribuye a la absorción de calcio en el cuerpo.",
-      image: "/salud/08-vitamina-d.jpg",
-      imageAlt: "Valle y naturaleza",
+      image: "/stock/hero-olivos.jpg",
+      imageAlt: "Olivos en el valle",
     },
   ],
 } as const;

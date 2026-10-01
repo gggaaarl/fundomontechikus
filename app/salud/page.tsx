@@ -3,7 +3,7 @@ import { saludCopy } from "@/lib/site-content";
 
 export default function SaludPage() {
   return (
-    <main>
+    <main className="bg-background">
       <section className="border-b border-line bg-white px-6 py-14 text-center sm:py-16">
         <p className="text-xs font-bold tracking-[0.3em] text-gold uppercase">{saludCopy.eyebrow}</p>
         <h1 className="mt-3 font-display text-3xl tracking-wide text-olive uppercase sm:text-4xl">

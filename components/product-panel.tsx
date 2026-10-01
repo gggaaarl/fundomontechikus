@@ -284,8 +284,7 @@ export function ProductPanel() {
               {productNutrition.servingsPerContainer}.
             </p>
             <p className="mt-3 font-sans text-sm text-ink/65">
-              <strong className="text-olive">Ingredientes:</strong> {productNutrition.ingredients}{" "}
-              <strong className="text-olive">Conservación:</strong> {productNutrition.storage}
+              <strong className="text-olive">Ingredientes:</strong> {productNutrition.ingredients}
             </p>
           </div>
 
@@ -305,9 +304,6 @@ export function ProductPanel() {
               />
               <span className="pointer-events-none absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/5" />
             </div>
-            <p className="mt-3 font-sans text-xs tracking-wide text-ink/55">
-              Clic para ampliar · usa + / − o la rueda del mouse para zoom
-            </p>
           </button>
         </div>
       </section>

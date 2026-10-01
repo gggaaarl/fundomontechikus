@@ -2,6 +2,11 @@ import type { ComponentType, ReactNode } from "react";
 import Image from "next/image";
 import { site } from "@/lib/site-content";
 
+function displayPhone(entry: (typeof site.contact.phones)[number]) {
+  const suffix = "suffix" in entry ? entry.suffix : undefined;
+  return suffix ? `${entry.number} / ${suffix}` : entry.number;
+}
+
 function phoneHref(number: string, whatsapp?: boolean) {
   const digits = number.replace(/\D/g, "");
   if (!digits) return null;
@@ -141,7 +146,7 @@ export function SiteFooter() {
                 label={phoneEntry.label}
                 icon={PhoneIcon}
               >
-                {phoneEntry.number}
+                {displayPhone(phoneEntry)}
               </FooterLink>
             ) : null}
 
@@ -152,7 +157,7 @@ export function SiteFooter() {
                 icon={WhatsAppIcon}
                 external
               >
-                {whatsappEntry.number}
+                {displayPhone(whatsappEntry)}
               </FooterLink>
             ) : null}
 

@@ -41,7 +41,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-line bg-header-bg/95 backdrop-blur">
         <p className="hidden border-b border-line py-1.5 text-center text-[11px] tracking-[0.16em] text-olive/75 uppercase font-sans lg:block">
           {site.locationLine}
         </p>
@@ -60,7 +60,7 @@ export function SiteHeader() {
             ))}
           </nav>
           <Link href="/" className="flex shrink-0 justify-center">
-            <div className="relative mix-blend-multiply">
+            <div className="relative">
               <Image
                 src="/logo_nuevo.jpeg"
                 alt={site.name}
@@ -93,7 +93,7 @@ export function SiteHeader() {
               width={140}
               height={140}
               priority
-              className="h-14 w-auto object-contain mix-blend-multiply"
+              className="h-14 w-auto object-contain"
             />
           </Link>
           <button

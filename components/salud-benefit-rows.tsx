@@ -1,21 +1,32 @@
 import Image from "next/image";
 import { saludCopy } from "@/lib/site-content";
 
+const ROW_MIN_LG = "lg:min-h-[22rem] xl:min-h-[27.5rem]";
+
 function BenefitImage({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative min-h-[240px] w-full lg:min-h-[min(36vw,440px)]">
-      <Image src={src} alt={alt} fill className="object-cover object-center" sizes="(max-width: 1024px) 100vw, 50vw" quality={88} />
+    <div className={`relative aspect-[4/3] w-full sm:aspect-[3/2] lg:aspect-auto ${ROW_MIN_LG}`}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover object-center"
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        quality={88}
+      />
     </div>
   );
 }
 
 function BenefitText({ title, description }: { title: string; description: string }) {
   return (
-    <div className="flex min-h-[240px] w-full flex-col items-center justify-center bg-salud-cream px-8 py-14 text-center lg:min-h-[min(36vw,440px)] lg:px-12">
+    <div
+      className={`flex w-full flex-col items-center justify-center bg-salud-cream px-8 py-12 text-center sm:py-14 lg:px-12 ${ROW_MIN_LG}`}
+    >
       <h2 className="font-display text-2xl tracking-wide text-ink uppercase sm:text-3xl lg:text-[2rem]">
         {title}
       </h2>
-      <p className="mt-5 max-w-md font-sans text-[15px] leading-relaxed text-ink/65 sm:text-base">
+      <p className="mt-5 max-w-md font-sans text-base leading-relaxed text-ink/70">
         {description}
       </p>
     </div>
@@ -25,7 +36,7 @@ function BenefitText({ title, description }: { title: string; description: strin
 /** Cuadrícula tipo El Olivar Beneficios: 50/50 sin gutters, imagen | texto alternado. */
 export function SaludBenefitRows() {
   return (
-    <div>
+    <div className="bg-white">
       {saludCopy.benefits.map((item, index) => {
         const imageFirst = index % 2 === 0;
         return (
