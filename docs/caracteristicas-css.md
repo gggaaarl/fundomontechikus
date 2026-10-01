@@ -87,6 +87,7 @@ Inspiración general: [Fundo Incahuasi](https://fundoincahuasi.com/). Análisis 
 
 ## Página Salud (`/salud`)
 
-- Contenido: `saludCopy` en `lib/site-content.ts` (8 beneficios).
-- Layout: `components/salud-benefit-rows.tsx` — filas alternadas imagen/texto (par = imagen izquierda).
-- Menú: enlace «Salud» en `navLinks.secondary`.
+- Modelo: [El Olivar Beneficios](https://www.elolivar.com.pe/beneficios/) — ver **`docs/analisis-el-olivar-beneficios.md`**.
+- Contenido: `saludCopy` en `lib/site-content.ts` (8 beneficios, textos cortos).
+- Layout: `salud-benefit-rows.tsx` — grid **50/50** ancho completo, sin gutters; celdas crema `#fdf7f0`; fotos en `public/salud/`.
+- Menú: «Salud» en `navLinks.secondary`.

@@ -51,7 +51,7 @@ Alternancia de bloques: **hero → historia → mapa/ubicación → productos �
 | Hero | Slider con copy mínimo | Carrusel comercial | Banners rotativos |
 | Salud | Recomendaciones en home | Certificaciones | Página Beneficios (bloques imagen/texto) |
 
-Montechico encaja mejor en el arco **Incahuasi + Beneficios tipo El Olivar**: fundo familiar, poco catálogo, página Salud dedicada.
+Montechico encaja mejor en el arco **Incahuasi + Beneficios tipo El Olivar**: fundo familiar, poco catálogo, página Salud dedicada. Desglose del grid Beneficios: **`docs/analisis-el-olivar-beneficios.md`**.
 
 ---
 

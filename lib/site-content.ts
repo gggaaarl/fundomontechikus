@@ -170,65 +170,59 @@ export const ubicacionCopy = {
 
 export const saludCopy = {
   eyebrow: "Salud",
-  title: "Beneficios del aceite de oliva",
+  title: "Beneficios",
   intro:
-    "El aceite de oliva extra virgen, como Don Santino, aporta nutrientes y compuestos bioactivos cuando forma parte de una alimentación equilibrada. Estos son algunos de los beneficios asociados a su consumo moderado.",
+    "Los beneficios que el consumo de aceite de oliva extra virgen tiene para ofrecernos son muchos, sobre todo si va acompañado de una dieta sana. Conócelos aquí.",
   benefits: [
     {
       title: "Vitamina E",
-      description:
-        "Actúa como antioxidante natural que ayuda a proteger las células del estrés oxidativo, contribuyendo al cuidado general del organismo.",
-      image: "/producto_principal.jpeg",
-      imageAlt: "Botella de aceite Don Santino",
+      description: "Actúa como desintoxicante natural.",
+      image: "/salud/01-aceite-vitamina-e.jpg",
+      imageAlt: "Aceite de oliva dorado",
     },
     {
-      title: "Ácidos grasos monoinsaturados",
-      description:
-        "Componente característico del aceite de oliva; en el marco de una dieta variada pueden ayudar a cuidar la salud cardiovascular.",
-      image: "/galeria/aceitunas.jpg",
-      imageAlt: "Aceituna recién cosechada",
+      title: "Ácidos grasos",
+      description: "Ayudan a reducir el riesgo de sufrir enfermedades del corazón.",
+      image: "/salud/02-aceitunas-acidos-grasos.jpg",
+      imageAlt: "Aceitunas verdes y negras",
     },
     {
       title: "Vitamina A",
       description:
-        "Contribuye al mantenimiento de mucosas y piel, y participa en el funcionamiento normal del sistema inmunológico.",
-      image: "/hero/fundo.jpg",
-      imageAlt: "Olivos en el fundo Montechico",
+        "Contribuye a protegernos de diferentes virus, fortaleciendo el sistema inmunológico.",
+      image: "/salud/03-vitamina-a.jpg",
+      imageAlt: "Aceite de oliva en cocina",
     },
     {
-      title: "Colesterol HDL y LDL",
-      description:
-        "Un estilo de vida saludable con grasas de calidad puede favorecer un equilibrio entre el colesterol «bueno» (HDL) y el «malo» (LDL).",
-      image: "/producto/etiqueta-y-tabla-nutricional.jpg",
-      imageAlt: "Información nutricional del producto",
+      title: "Aumenta el colesterol HDL",
+      description: '(Colesterol "bueno") y reduce el LDL (colesterol "malo").',
+      image: "/salud/04-colesterol-hdl.jpg",
+      imageAlt: "Estilo de vida activo",
     },
     {
       title: "Vitamina K",
-      description:
-        "Interviene en procesos normales de coagulación sanguínea y en el metabolismo óseo.",
-      image: "/galeria/1.jpg",
-      imageAlt: "Valle de Chaparra",
+      description: "Ayuda a la coagulación de la sangre.",
+      image: "/salud/05-vitamina-k.jpg",
+      imageAlt: "Alimentación saludable",
     },
     {
       title: "Propiedades antiinflamatorias",
       description:
-        "Compuestos fenólicos del aceite virgen pueden apoyar el bienestar digestivo y reducir molestias leves como hinchazón o gases.",
-      image: "/galeria/3.jpg",
-      imageAlt: "Cultivo de olivo",
+        "Puede reducir síntomas de trastornos digestivos (gases o hinchazón abdominal).",
+      image: "/salud/06-antiinflamatorio.jpg",
+      imageAlt: "Ensalada fresca",
     },
     {
-      title: "Piel, uñas y cabello",
-      description:
-        "Grasas saludables y antioxidantes del aceite de oliva se usan tradicionalmente en rutinas que buscan hidratación y cuidado externo.",
-      image: "/galeria/5.jpg",
-      imageAlt: "Trabajo en el fundo",
+      title: "Propiedades fortalecedoras",
+      description: "Astringentes y antisépticas (piel, uñas y cabello).",
+      image: "/salud/07-piel-cabello.jpg",
+      imageAlt: "Cuidado personal natural",
     },
     {
-      title: "Vitamina D y calcio",
-      description:
-        "La vitamina D favorece la absorción de calcio y fósforo, minerales importantes para huesos y dientes.",
-      image: "/galeria/4.jpg",
-      imageAlt: "Paisaje del fundo",
+      title: "Vitamina D",
+      description: "Contribuye a la absorción de calcio en el cuerpo.",
+      image: "/salud/08-vitamina-d.jpg",
+      imageAlt: "Valle y naturaleza",
     },
   ],
 } as const;

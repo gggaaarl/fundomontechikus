@@ -1,0 +1,8 @@
+Imágenes de la página /salud (referencia visual tipo El Olivar Beneficios).
+Reemplazar por fotografía propia cuando esté disponible.
+
+01-aceite-vitamina-e.jpg — Unsplash (images.unsplash.com)
+05-vitamina-k.jpg — Unsplash
+06-antiinflamatorio.jpg — Unsplash
+07-piel-cabello.jpg — Unsplash
+02, 03, 04, 08 — copias desde public/stock/ (origen Unsplash, ver public/stock/ATTRIBUTION.txt)

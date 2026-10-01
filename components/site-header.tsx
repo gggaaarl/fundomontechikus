@@ -42,10 +42,6 @@ export function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
-        <p className="hidden border-b border-line py-1.5 text-center text-[11px] tracking-[0.16em] text-olive/75 uppercase font-sans lg:block">
-          {site.locationLine}
-        </p>
-
         {/* Desktop */}
         <div className="mx-auto hidden max-w-6xl items-center justify-between gap-4 px-6 py-4 lg:flex">
           <nav className="flex flex-1 items-center gap-6">
