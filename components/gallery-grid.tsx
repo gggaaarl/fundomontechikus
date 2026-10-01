@@ -44,7 +44,7 @@ export function GalleryGrid() {
                 onClick={() => setOpenIndex(index)}
                 aria-label={`Ampliar: ${item.alt}`}
               >
-                <div className="relative flex min-h-[min(72vw,420px)] items-center justify-center bg-paper p-2 lg:min-h-0 lg:aspect-[4/3] lg:p-0">
+                <div className="relative flex min-h-[min(72vw,420px)] items-center justify-center bg-white p-2 lg:min-h-0 lg:aspect-[4/3] lg:p-0">
                   <Image
                     src={item.src}
                     alt={item.alt}

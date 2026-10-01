@@ -1,88 +1,117 @@
 # Análisis de diseño — referencias del sector
 
-Comparativa cualitativa de tres sitios del rubro aceite de oliva / agroindustrial en Perú y LATAM. Objetivo: entender **qué los hace atractivos** y qué conviene conservar en [Fundo Montechico](https://fundoincahuasi.com/) (nuestro proyecto).
+Comparativa cualitativa de **cuatro** sitios del rubro aceite de oliva / agroindustrial. Objetivo: entender **qué los hace atractivos** y qué aplicamos en Fundo Montechico.
 
 Sitios analizados:
 
 - [Fundo Incahuasi](https://fundoincahuasi.com/)
 - [Olivos del Sur](https://olivosdelsur.com/)
-- [El Olivar](https://www.elolivar.com.pe/) — página [Beneficios](https://www.elolivar.com.pe/beneficios/)
+- [El Olivar](https://www.elolivar.com.pe/) — [Beneficios](https://www.elolivar.com.pe/beneficios/)
+- [Fundo San Antonio](https://www.fundosanantonio.com.pe/) — ficha [Aceite de oliva extra virgen](https://www.fundosanantonio.com.pe/es/products/aceite-de-oliva-extra-virgen)
 
 ---
 
 ## 1. Qué tienen en común (y por qué “enganchan”)
 
+### Fondo blanco en el contenido
+
+**Las cuatro webs** apoyan casi todo el contenido en **blanco** (o blanco roto muy claro), no en grises fuertes ni fondos crema en toda la página. La cabecera también suele ser clara; el contraste lo aportan:
+
+- **Fotografía** (olivar, botella, lifestyle)
+- **Tipografía** oscura o verde oliva
+- **Pie o bloques** oscuros / de color (Incahuasi verde, tiendas con footers grises)
+
+Montechico adoptó **`--background` y `--paper` en `#ffffff`** en Inicio, Catálogo, Galería y Salud; solo el **pie** y el **menú móvil** mantienen verde oliva. Detalle técnico: `docs/caracteristicas-css.md`.
+
 ### Narrativa de origen antes que de catálogo
 
-Los tres anclan la marca en **tierra, valle y tradición** (Bella Unión, Villacurí/Lurín, proceso propio). No abren vendiendo SKUs: abren contando **de dónde sale** el producto. Eso genera confianza y diferencia frente a un e-commerce genérico.
+Anclan la marca en **tierra, valle y tradición**. No abren solo con SKUs: cuentan **de dónde sale** el producto. San Antonio e Incahuasi enfatizan fundo y proceso; El Olivar y Olivos del Sur mezclan origen con lifestyle o catálogo amplio.
 
 ### Identidad visual “premium natural”
 
-Paleta recurrente: **verdes oliva**, **blancos/cremas**, **dorados o marrones** cálidos, fotografía grande de **olivar, cosecha y botella**. Tipografía con serif o display en títulos (elegancia) y sans en cuerpo (legibilidad). Sensación: **artesanal + exportación + limpio**.
+**Verdes oliva**, **blancos**, **dorados** o marrones cálidos, fotografía de olivar y producto. Serif/display en títulos, sans en cuerpo. Sensación: artesanal, limpio, exportable.
 
-### Jerarquía clara y pocas distracciones
+### Jerarquía clara
 
-Menús cortos: nosotros/historia, productos o catálogo, beneficios o bienestar, contacto. El usuario no elige entre veinte rutas; **recorre una historia** y cae en producto o contacto cuando ya está convencido.
+Menús relativamente cortos; el usuario **recorre** historia → producto → confianza → contacto (contacto a menudo en pie, no hace falta repetirlo cinco veces en el header).
 
-### Fotografía como protagonista
+### Fotografía protagonista
 
-Hero amplio (slider o banner), imágenes a pantalla casi completa en móvil, galerías o bloques imagen–texto. El producto se **ve** (color del aceite, aceituna, paisaje árido verde). Texto secundario respecto a la imagen en landings emocionales.
+Hero amplio, producto grande en ficha, galerías o grids imagen–texto. El aceite **se ve** antes de leerse.
 
-### Confianza y salud (sin ser clínico)
+### Confianza y salud (sin tono clínico)
 
-[El Olivar](https://www.elolivar.com.pe/beneficios/) y secciones similares traducen el aceite en **beneficios comprensibles** (vitaminas, corazón, digestión). [Incahuasi](https://fundoincahuasi.com/) mezcla calidad exportación, procesos y recomendaciones. [Olivos del Sur](https://olivosdelsur.com/) refuerza **certificaciones** y escala industrial seria. Todos venden **bienestar + calidad**, no solo litros.
+Beneficios en lenguaje claro (El Olivar, San Antonio en descripción de producto). Certificaciones (Olivos del Sur). Calidad y exportación (Incahuasi).
 
-### Contacto y conversión social
+### Ritmo de scroll
 
-WhatsApp, teléfono visible, redes (Facebook, Instagram; Incahuasi también YouTube). Pie de página denso en datos útiles. En Olivos del Sur, además, tienda y logística — pero siempre con **humanidad** (horarios, dirección física).
-
-### Ritmo de scroll (cadencia)
-
-Alternancia de bloques: **hero → historia → mapa/ubicación → productos → galería/video → pie**. Espacio en blanco generoso, títulos con línea decorativa o eyebrow en mayúsculas. En móvil, **above the fold** cuidado: logo, una foto fuerte, un titular.
+Bloques alternados, aire en blanco, eyebrows en mayúsculas. **Above the fold** cuidado en móvil.
 
 ---
 
-## 2. Diferencias útiles (no copiar todo)
+## 2. Fundo San Antonio — ficha de producto (referencia catálogo)
 
-| Aspecto | Incahuasi | Olivos del Sur | El Olivar |
-|--------|-----------|----------------|-----------|
-| Tono | Fundo único, exportación, timeline histórico | Industrial + tienda online, promociones | Lifestyle, recetas, bienestar editorial |
-| Menú | Anclas en home + catálogo/galería | E-commerce grande, categorías | Beneficios, bienestar, cocina |
-| Hero | Slider con copy mínimo | Carrusel comercial | Banners rotativos |
-| Salud | Recomendaciones en home | Certificaciones | Página Beneficios (bloques imagen/texto) |
+La URL de producto es el modelo que usamos en **`/catalogo`**:
 
-Montechico encaja mejor en el arco **Incahuasi + Beneficios tipo El Olivar**: fundo familiar, poco catálogo, página Salud dedicada. Desglose del grid Beneficios: **`docs/analisis-el-olivar-beneficios.md`**.
+| Elemento | San Antonio | Montechico |
+|----------|-------------|------------|
+| Migas | Franja gris clara `Productos > … > …` | `catalogProduct.breadcrumbs` + `bg-[#e8e6e2]` |
+| Fondo página | Blanco | Blanco |
+| Imagen producto | Grande, clic / zoom habitual en e-commerce | Lightbox al clic |
+| Título | Una línea, tamaño moderado | `catalogProduct.title`, `text-xl`/`2xl` |
+| Disponibilidad | “En stock” en verde | `inStockLabel`, verde `#3d7a4a` |
+| Nutrición / salud | Enlace o pestañas según tienda | Botón → **`/salud`** |
+| Tabla nutricional inline | A veces imagen de etiqueta | Retirada tabla manual; salud en página dedicada |
 
----
-
-## 3. Patrones de UI concretos que funcionan
-
-1. **Eyebrow + título + línea dorada** — marca secciones sin gritar.
-2. **Slider hero** con puntos y poco texto — misterio y paisaje.
-3. **Menú móvil full-screen** de color sólido (verde) — premium y legible.
-4. **Grid galería + lightbox** — exploración táctil.
-5. **Bloques alternados imagen | texto** — ideal para beneficios (8 ítems en El Olivar).
-6. **Mapa embebido** — prueba de origen real (Incahuasi / Montechico).
-7. **Pie oscuro** con logo claro, teléfono, WhatsApp, email, redes.
+San Antonio confirma que **blanco + franja gris de migas + ficha limpia** es estándar del sector peruano premium.
 
 ---
 
-## 4. Aplicación en Fundo Montechico
+## 3. Diferencias útiles (no copiar todo)
 
-| Referencia | Implementación en el repo |
-|------------|---------------------------|
-| Home largo Incahuasi | `/` con `#historia`, `#ubicacion`, `#video` |
-| Beneficios El Olivar | `/salud` — 8 filas imagen/texto alternadas |
+| Aspecto | Incahuasi | Olivos del Sur | El Olivar | San Antonio |
+|--------|-----------|----------------|-----------|-------------|
+| Tono | Fundo, timeline, exportación | Tienda + promos | Recetas, bienestar | Producto + fundo |
+| Menú | Anclas + catálogo/galería | Muchas categorías | Beneficios, cocina | Productos, nosotros |
+| Hero | Slider | Carrusel comercial | Banners | Variable |
+| Salud | Recomendaciones home | Certificaciones | Grid Beneficios | En ficha / contenido |
+| E-commerce | Ligero | Fuerte | Tienda virtual | Catálogo producto |
+
+Montechico: arco **Incahuasi (home) + San Antonio (catálogo) + El Olivar (salud)**. Grid Salud: `docs/analisis-el-olivar-beneficios.md`.
+
+---
+
+## 4. Patrones de UI que funcionan
+
+1. **Fondo blanco** en páginas de contenido (las 4 referencias).
+2. **Eyebrow + título + línea dorada** en secciones.
+3. **Slider hero** con poco texto.
+4. **Menú móvil** pantalla verde (Incahuasi / Montechico).
+5. **Galería + lightbox**.
+6. **Grid imagen | texto** (Beneficios / Salud).
+7. **Mapa embebido** (origen real).
+8. **Migas grises** en producto (San Antonio).
+9. **Pie oscuro** con contacto y redes.
+
+---
+
+## 5. Aplicación en Fundo Montechico
+
+| Referencia | Implementación |
+|------------|----------------|
+| Home Incahuasi | `/` — `#historia`, `#ubicacion`, `#video` |
+| Producto San Antonio | `/catalogo` — migas, stock verde, lightbox |
+| Beneficios El Olivar | `/salud` — 8 filas, crema solo en celdas texto |
 | Galería Incahuasi | `/galeria` + lightbox |
-| Tokens visuales | `globals.css` — olive, gold, paper (ver `caracteristicas-css.md`) |
-| Menú | Inicio, Catálogo \| Galería, **Salud**, Contacto |
+| Blanco global | `globals.css` — `#ffffff` |
+| Menú | Inicio, Catálogo \| Galería, Salud — contacto en **pie** |
 
 ---
 
-## 5. Conclusión
+## 6. Conclusión
 
-Lo que estos sitios comparten y hace que resulten **atractivos** no es un truco de moda: es **coherencia** entre lo que venden (aceite de origen) y cómo lo cuentan (paisaje, salud, confianza, contacto fácil). La web se siente como **extensión del fundo**, no como plantilla vacía. Montechico gana manteniendo fotos reales, copy en español claro, secciones pocas pero profundas, y una página de salud educativa al estilo [El Olivar Beneficios](https://www.elolivar.com.pe/beneficios/), sin perder la sobriedad de [Incahuasi](https://fundoincahuasi.com/).
+Lo que hace **atractivas** a estas cuatro webs no es un efecto puntual: es **coherencia** (origen, calidad, blanco, fotos grandes) y **confianza** (contacto, salud, proceso). El **blanco compartido** es el hilo que une Incahuasi, Olivos del Sur, El Olivar y Fundo San Antonio; Montechico lo unificó en las cuatro vistas principales y reserva color fuerte para pie y menú móvil.
 
 ---
 
-*Documento interno del proyecto. Actualizar si cambian referencias o rutas.*
+*Documento interno. CSS detallado: `caracteristicas-css.md`.*

@@ -13,7 +13,7 @@ export function ChaparraMapSection() {
         sizes="100vw"
         aria-hidden
       />
-      <div className="absolute inset-0 bg-paper/65" aria-hidden />
+      <div className="absolute inset-0 bg-white/70" aria-hidden />
 
       <div className="relative mx-auto max-w-5xl px-6">
         <div className="overflow-hidden rounded-3xl border border-line/80 bg-white/95 shadow-xl backdrop-blur-sm">

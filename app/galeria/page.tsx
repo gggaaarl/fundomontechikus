@@ -9,7 +9,7 @@ export default function GaleriaPage() {
         title="Imágenes del fundo"
         description="Imágenes del fundo y del valle."
       />
-      <section className="section-block bg-background">
+      <section className="section-block bg-white">
         <div className="mx-auto max-w-7xl px-6">
           <GalleryGrid />
         </div>

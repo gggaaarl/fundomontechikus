@@ -117,7 +117,7 @@ export function HeroSlider() {
   return (
     <section
       ref={sectionRef}
-      className={`relative touch-pan-y overflow-hidden border-b border-line bg-paper select-none ${HERO_HEIGHT}`}
+      className={`relative touch-pan-y overflow-hidden border-b border-line bg-white select-none ${HERO_HEIGHT}`}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -134,7 +134,7 @@ export function HeroSlider() {
           const slideBg =
             "slideBackground" in item && item.slideBackground === "white"
               ? "bg-white"
-              : "bg-paper";
+              : "bg-white";
           const showOverlay = !item.showHeroCopy && item.imageFit === "cover";
 
           return (

@@ -1,93 +1,180 @@
 # Características CSS — Fundo Montechico
 
-Referencia de tokens, utilidades globales y convenciones de layout. El origen de verdad de colores y fuentes está en `app/globals.css`; Tailwind 4 los expone como clases (`bg-olive`, `text-gold`, etc.).
+Guía del sistema visual del sitio. **Fuente de verdad:** `app/globals.css` (tokens), `app/layout.tsx` (fuentes), componentes listados abajo.
 
-## Paleta (`:root`)
+Documentos relacionados:
 
-| Token | Hex | Uso típico |
-|--------|-----|------------|
-| `--background` / `--paper` | `#faf6f5` | Fondo general, slider (no verde), tarjetas claras |
-| `--foreground` / `--ink` | `#1c1a17` | Texto principal |
-| `--olive` | `#2c3424` | Pie, menú móvil, títulos |
-| `--gold` | `#b89a62` | Eyebrows, líneas decorativas, hovers |
-| `--line` | `#e4ddd2` | Bordes suaves |
+- `docs/analisis-diseno-referencias.md` — comparativa con sitios del sector (incl. fondo blanco).
+- `docs/analisis-el-olivar-beneficios.md` — grid de la página Salud.
 
-Clases Tailwind: `bg-background`, `bg-paper`, `bg-olive`, `text-ink`, `text-paper`, `text-gold`, `border-line`.
+---
 
-## Tipografía
+## 1. Filosofía de color
 
-- **Sans (cuerpo):** Outfit → `font-sans`, variable `--font-outfit` (`app/layout.tsx`).
-- **Display (títulos):** Bodoni Moda → `font-display`, variable `--font-bodoni`.
+Las referencias del rubro ([Incahuasi](https://fundoincahuasi.com/), [El Olivar](https://www.elolivar.com.pe/), [Olivos del Sur](https://olivosdelsur.com/), [Fundo San Antonio](https://www.fundosanantonio.com.pe/)) usan **páginas blancas** para que fotos, botellas y tipografía oscura respiren. Montechico sigue esa línea:
+
+| Zona | Fondo |
+|------|--------|
+| **Inicio, Catálogo, Galería, Salud** (contenido) | **Blanco** `#ffffff` |
+| **Cabecera** (desktop y móvil, barra logo/menú) | **Blanco** semitransparente `bg-white/95` |
+| **Pie** | Verde oliva `#2c3424` (contraste) |
+| **Menú móvil abierto** | Verde oliva (pantalla completa) |
+| **Celdas de texto en `/salud`** (grid beneficios) | Crema `#fdf7f0` (`--salud-cream`) — excepción tipo El Olivar |
+| **Migas catálogo** | Gris claro `#e8e6e2` (solo franja breadcrumb) |
+
+No usamos crema global en body: `--background` y `--paper` son **blanco**.
+
+---
+
+## 2. Tokens (`:root` en `app/globals.css`)
+
+| Variable | Valor | Clase Tailwind | Uso |
+|----------|--------|----------------|-----|
+| `--background` | `#ffffff` | `bg-background` | `body`, secciones por defecto |
+| `--paper` | `#ffffff` | `bg-paper` | Alias blanco (header legacy, modales claros) |
+| `--foreground` / `--ink` | `#1c1a17` | `text-ink` | Texto principal |
+| `--olive` | `#2c3424` | `bg-olive`, `text-olive` | Pie, menú móvil, títulos |
+| `--gold` | `#b89a62` | `text-gold`, `bg-gold` | Eyebrows, líneas decorativas |
+| `--line` | `#e4ddd2` | `border-line` | Separadores suaves |
+| `--salud-cream` | `#fdf7f0` | `bg-salud-cream` | Solo celdas texto en grid Salud |
+
+**Selección de texto:** fondo `#e7dcc4`, texto `#1c1a17` (`::selection` en `globals.css`).
+
+---
+
+## 3. Tipografía
+
+Cargadas en `app/layout.tsx` (Google Fonts):
+
+| Rol | Fuente | Variable CSS | Clase |
+|-----|--------|--------------|--------|
+| Cuerpo | Outfit | `--font-outfit` | `font-sans` |
+| Títulos | Bodoni Moda | `--font-bodoni` | `font-display` |
 
 Patrones habituales:
 
-- Eyebrows: `text-xs tracking-[0.3em] uppercase text-gold`
-- Títulos de sección: `font-display text-3xl uppercase text-olive sm:text-4xl`
-- Microcopy / menú: `text-[11px]–[12px] tracking-[0.14em]–[0.22em] uppercase`
+- **Eyebrow:** `text-xs font-bold tracking-[0.3em] uppercase text-gold`
+- **H2 sección:** `font-display text-3xl uppercase text-olive sm:text-4xl`
+- **Menú / microcopy:** `text-[11px]–[12px] tracking-[0.14em]–[0.22em] uppercase`
+- **Catálogo — stock:** `text-sm font-medium text-[#3d7a4a]` (“En stock”)
 
-## Espaciado y secciones
+---
 
-- **`.section-block`** — `padding-block: clamp(4rem, 8vw, 6rem)` para bloques largos (catálogo, galería, etc.).
-- **Historia en inicio** — padding propio en `components/inicio-sections.tsx`: menos arriba en móvil y `pb-[min(14vh,6rem)]` bajo el lead para separar la primera pantalla del párrafo «En el valle de Cháparra…».
-- **Scroll a anclas** — `scroll-margin-top: 7rem` (desktop) y `5rem` (&lt;1024px) en `section[id]`, `footer[id]`, `#ubicacion`.
+## 4. Layout global
 
-## Animaciones
+- **`body`:** `min-h-full flex flex-col bg-background text-ink` → columna: header + contenido + footer.
+- **`.section-block`:** `padding-block: clamp(4rem, 8vw, 6rem)`.
+- **Anclas:** `scroll-margin-top: 7rem` (desktop), `5rem` en viewport &lt; 1024px (`section[id]`, `footer#contacto`, `#ubicacion`).
 
-- **`.animate-hero-copy`** — entrada del texto del hero (`hero-copy-in`, 0.9s): opacidad + `translateY(12px) → 0`.
-- **Carrusel hero** — transición horizontal `duration-500 ease-out` al cambiar slide o soltar swipe.
+---
 
-## Hero slider (`components/hero-slider.tsx`)
+## 5. Cabecera (`components/site-header.tsx`)
 
-### Altura del bloque
+- Barra superior desktop: ubicación (`site.locationLine`).
+- Fila principal: blanco, borde inferior `border-line`.
+- Desktop: Inicio | Catálogo — logo — Galería | Salud (sin “Contacto” en menú; contacto en pie).
+- Móvil: logo centrado, hamburguesa; overlay `bg-olive`.
 
+---
+
+## 6. Pie (`components/site-footer.tsx`)
+
+- `bg-olive`, texto `text-paper`.
+- Enlaces con iconos: Email, Teléfono, WhatsApp, Facebook, Instagram.
+
+---
+
+## 7. Página Inicio (`/`)
+
+| Bloque | Componente | Fondo |
+|--------|------------|--------|
+| Hero slider | `hero-slider.tsx` | Blanco (slides producto `bg-white`) |
+| Historia | `inicio-sections.tsx` | Blanco |
+| Ubicación / mapa | `chaparra-map-section.tsx` | Foto + velo `bg-white/70`; tarjeta mapa blanca |
+| Video | `inicio-sections.tsx` | Blanco |
+
+### Hero (`components/hero-slider.tsx`)
+
+Alturas (`HERO_HEIGHT`):
+
+- Móvil: `38svh`, max 360px  
+- `sm`: 42svh, max 400px  
+- `lg+`: 56vh, max 560px  
+
+Slides (`heroSlides` en `lib/site-content.ts`):
+
+1. **Fundo** — `.hero-slide-fundo` en CSS: `cover`, sin degradado negro; texto con `drop-shadow`.
+2. **Producto** — `object-contain`, fondo blanco.
+3. **Aceitunas** — `object-cover`, degradado inferior ligero.
+
+Interacción: swipe, autoplay 7s, bolitas blancas.
+
+### CSS hero slide 1 (`app/globals.css`)
+
+```css
+.hero-slide-fundo { object-fit: cover; object-position: 22% center; }
+@media (min-width: 1024px) { object-position: center 38%; }
 ```
-móvil:  38svh, max 360px, min 200px
-sm:     42svh, max 400px
-lg+:    56vh, max 560px
-```
 
-Fondo del carrusel: `bg-paper` (crema), no verde.
+---
 
-### Slides (datos en `lib/site-content.ts` → `heroSlides`)
+## 8. Catálogo (`/catalogo`, `product-panel.tsx`)
 
-| Slide | Imagen | Comportamiento |
-|-------|--------|----------------|
-| 1 Fundo | `/hero/fundo.jpg` | Clase **`.hero-slide-fundo`**: `cover` a altura completa; móvil `object-position: 22% center`; desktop `center 38%`. **Sin degradado** en slide 1; texto con `drop-shadow`. |
-| 2 Producto | `/producto_principal.jpeg` | `object-contain`, fondo **`bg-white`**, sin degradado verde/oscuro extra. |
-| 3 Aceitunas | `/galeria/aceitunas.jpg` | `object-cover` a **ancho completo** en todos los breakpoints; `object-position: center 42%`. Degradado inferior suave. |
+- **Migas:** franja `bg-[#e8e6e2]`, texto `Productos > Aceite de oliva > …`
+- **Contenido:** fondo blanco, grid 2 columnas (foto + ficha).
+- **Título producto:** una línea, `text-xl` / `text-2xl`, `text-olive`.
+- **Botones:** «Información nutricional» → ancla `#informacion-nutricional`; «Beneficios para la salud» → `/salud`.
+- **Sección nutricional:** imagen de etiqueta (`productNutrition.labelImage`); clic abre lightbox con **zoom** (+ / −, rueda, teclado). Sin tabla HTML manual.
+- **Foto producto:** mismo lightbox con zoom.
 
-Interacción: swipe horizontal (~56px umbral), autoplay 7s, bolitas blancas.
+Datos: `catalogProduct` en `lib/site-content.ts`.
 
-## Cabecera
+---
 
-- **Desktop:** barra de ubicación (`place.header`), menú izquierda / logo / menú derecha.
-- **Móvil:** solo logo centrado + hamburguesa; menú full-screen `bg-olive` sin logo JPEG (evita recuadro blanco).
+## 9. Galería (`/galeria`, `gallery-grid.tsx`)
 
-## Pie (`components/site-footer.tsx`)
+- Página blanca; `PageBanner` blanco.
+- Grid 1/2 columnas; sin pies bajo fotos.
+- Desktop: hover oscurece imagen; click → lightbox.
 
-- Fondo `bg-olive`, texto `text-paper`.
-- Contacto en orden: Email → Teléfono → WhatsApp → Facebook → Instagram, cada uno con icono SVG inline.
+---
 
-## Contenido editable
+## 10. Salud (`/salud`)
 
-Textos, rutas del slider y contacto: **`lib/site-content.ts`**.  
-Colores y reglas del slide 1: **`app/globals.css`**.  
-Ajustes de altura del hero: constante `HERO_HEIGHT` en **`components/hero-slider.tsx`**.
+- Intro y disclaimer: **blanco**.
+- Grid 8 filas: `salud-benefit-rows.tsx` — 50/50 ancho completo, sin gutters.
+- Celdas **texto:** `bg-salud-cream` (#fdf7f0).
+- Celdas **imagen:** `object-cover`, altura `min(36vw, 440px)` en desktop.
+- Copy: `saludCopy` en `lib/site-content.ts`. Imágenes: `public/salud/`.
 
-## Galería (`components/gallery-grid.tsx`)
+---
 
-- **Sin pies** bajo cada foto (captions retirados de la UI).
-- **Móvil:** grid igual (`object-contain`, altura mínima); **tap** abre lightbox a pantalla completa.
-- **Desktop (`lg+`):** celdas `aspect-[4/3]`, `object-cover`; **hover** oscurece ~30% + leve zoom; **click** abre la misma galería ampliada.
-- **Lightbox:** fondo oscuro, contador `n / total`, flechas, tecla Escape y ← →, bloqueo de scroll; cierre al pulsar fuera de la imagen.
+## 11. Animaciones
 
-## Referencia de diseño
+- **`.animate-hero-copy`:** keyframes `hero-copy-in` (0.9s), opacidad + `translateY`.
+- **Carrusel:** `transition-transform duration-500 ease-out`.
+- **Galería hover:** `bg-black/30`, `scale-[1.02]` en desktop.
 
-Inspiración general: [Fundo Incahuasi](https://fundoincahuasi.com/). Análisis comparativo: `docs/analisis-diseno-referencias.md`.
+---
 
-## Página Salud (`/salud`)
+## 12. Dónde editar qué
 
-- Modelo: [El Olivar Beneficios](https://www.elolivar.com.pe/beneficios/) — ver **`docs/analisis-el-olivar-beneficios.md`**.
-- Contenido: `saludCopy` en `lib/site-content.ts` (8 beneficios, textos cortos).
-- Layout: `salud-benefit-rows.tsx` — grid **50/50** ancho completo, sin gutters; celdas crema `#fdf7f0`; fotos en `public/salud/`.
-- Menú: «Salud» en `navLinks.secondary`.
+| Quiero cambiar… | Archivo |
+|-----------------|---------|
+| Colores globales | `app/globals.css` |
+| Menú, textos, slider, catálogo, salud | `lib/site-content.ts` |
+| Hero altura / swipe | `components/hero-slider.tsx` |
+| Encuadre foto slide 1 | `app/globals.css` → `.hero-slide-fundo` |
+| Migas / ficha producto | `components/product-panel.tsx` |
+| Grid beneficios | `components/salud-benefit-rows.tsx` |
+| Galería / lightbox | `components/gallery-grid.tsx` |
+
+---
+
+## 13. Build y clases Tailwind 4
+
+Tailwind lee tokens en `@theme inline` dentro de `globals.css`. Tras cambiar variables, reiniciar `npm run dev` si alguna clase no se regenera.
+
+---
+
+*Última revisión alineada con fondo blanco en vistas principales y cuatro referencias de diseño en `analisis-diseno-referencias.md`.*

@@ -9,7 +9,7 @@ export function InicioSections() {
     <>
       <section
         id="historia"
-        className="scroll-mt-28 border-t border-line bg-background pt-10 pb-16 sm:pt-12 sm:pb-20 lg:py-[clamp(4rem,8vw,6rem)]"
+        className="scroll-mt-28 border-t border-line bg-white pt-10 pb-16 sm:pt-12 sm:pb-20 lg:py-[clamp(4rem,8vw,6rem)]"
       >
         <div className="mx-auto max-w-6xl px-6 pb-[min(18vh,7.5rem)] lg:pb-0">
           <SectionHeading
@@ -41,7 +41,7 @@ export function InicioSections() {
         <ChaparraMapSection />
       </div>
 
-      <section id="video" className="section-block scroll-mt-28 border-t border-line bg-paper">
+      <section id="video" className="section-block scroll-mt-28 border-t border-line bg-white">
         <div className="mx-auto max-w-5xl px-6">
           <SectionHeading
             eyebrow="Video"

@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { ContactForm } from "@/components/contact-form";
+import { useCallback, useEffect, useState } from "react";
 import { catalogProduct, place } from "@/lib/site-content";
+import { productNutrition } from "@/lib/product-nutrition";
 
 const details = [
   ["Nombre", catalogProduct.title],
@@ -19,12 +19,36 @@ const details = [
   ["Presentación", "1 L (consultar otras presentaciones)"],
 ];
 
-function ProductImageLightbox({ open, onClose }: { open: boolean; onClose: () => void }) {
+const MIN_ZOOM = 1;
+const MAX_ZOOM = 3;
+const ZOOM_STEP = 0.25;
+
+type LightboxPayload = {
+  src: string;
+  alt: string;
+  title: string;
+  aspectRatio: string;
+} | null;
+
+function ImageZoomLightbox({
+  payload,
+  onClose,
+}: {
+  payload: LightboxPayload;
+  onClose: () => void;
+}) {
+  const [scale, setScale] = useState(1);
+
+  const open = payload !== null;
+
   useEffect(() => {
     if (!open) return;
+    setScale(1);
     document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
+      if (event.key === "+" || event.key === "=") setScale((s) => Math.min(MAX_ZOOM, s + ZOOM_STEP));
+      if (event.key === "-") setScale((s) => Math.max(MIN_ZOOM, s - ZOOM_STEP));
     };
     window.addEventListener("keydown", onKey);
     return () => {
@@ -33,42 +57,93 @@ function ProductImageLightbox({ open, onClose }: { open: boolean; onClose: () =>
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  const zoomIn = useCallback(() => setScale((s) => Math.min(MAX_ZOOM, s + ZOOM_STEP)), []);
+  const zoomOut = useCallback(() => setScale((s) => Math.max(MIN_ZOOM, s - ZOOM_STEP)), []);
+  const resetZoom = useCallback(() => setScale(1), []);
+
+  if (!payload) return null;
 
   return (
     <div
       className="fixed inset-0 z-[100] flex flex-col bg-[#1a1a18]/95"
       role="dialog"
       aria-modal="true"
-      aria-label="Imagen del producto ampliada"
+      aria-label={payload.title}
       onClick={onClose}
     >
-      <div className="flex shrink-0 justify-end px-4 py-3 sm:px-6" onClick={(event) => event.stopPropagation()}>
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-sm p-2 text-paper/90 transition-colors hover:bg-white/10"
-          aria-label="Cerrar"
-        >
-          <svg className="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
-            <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </button>
-      </div>
       <div
-        className="relative mx-auto flex min-h-0 flex-1 w-full max-w-3xl items-center justify-center px-6 pb-10"
+        className="flex shrink-0 items-center justify-between gap-4 px-4 py-3 sm:px-6"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="relative h-full max-h-[min(78vh,900px)] w-full">
-          <Image
-            src={catalogProduct.image}
-            alt={catalogProduct.imageAlt}
-            fill
-            className="object-contain"
-            sizes="100vw"
-            quality={92}
-            priority
-          />
+        <p className="truncate text-sm text-paper/80">{payload.title}</p>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={zoomOut}
+            className="rounded-sm px-3 py-2 text-lg text-paper/90 hover:bg-white/10"
+            aria-label="Alejar"
+          >
+            −
+          </button>
+          <span className="min-w-[3.5rem] text-center text-xs tabular-nums text-paper/70">
+            {Math.round(scale * 100)}%
+          </span>
+          <button
+            type="button"
+            onClick={zoomIn}
+            className="rounded-sm px-3 py-2 text-lg text-paper/90 hover:bg-white/10"
+            aria-label="Acercar"
+          >
+            +
+          </button>
+          <button
+            type="button"
+            onClick={resetZoom}
+            className="ml-1 rounded-sm px-2 py-2 text-[11px] tracking-wide text-paper/70 uppercase hover:bg-white/10"
+          >
+            Ajustar
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="ml-2 rounded-sm p-2 text-paper/90 hover:bg-white/10"
+            aria-label="Cerrar"
+          >
+            <svg className="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+              <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div
+        className="min-h-0 flex-1 overflow-auto px-4 pb-8"
+        onClick={(event) => event.stopPropagation()}
+        onWheel={(event) => {
+          event.preventDefault();
+          const delta = event.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
+          setScale((s) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, s + delta)));
+        }}
+      >
+        <div className="flex min-h-full min-w-full items-center justify-center py-4">
+          <div
+            className="relative origin-center transition-transform duration-150 ease-out"
+            style={{
+              transform: `scale(${scale})`,
+              width: "min(92vw, 720px)",
+              aspectRatio: payload.aspectRatio,
+            }}
+          >
+            <Image
+              src={payload.src}
+              alt={payload.alt}
+              fill
+              className="object-contain"
+              sizes="100vw"
+              quality={92}
+              draggable={false}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -76,8 +151,23 @@ function ProductImageLightbox({ open, onClose }: { open: boolean; onClose: () =>
 }
 
 export function ProductPanel() {
-  const [contactOpen, setContactOpen] = useState(false);
-  const [imageOpen, setImageOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<LightboxPayload>(null);
+
+  const openProduct = () =>
+    setLightbox({
+      src: catalogProduct.image,
+      alt: catalogProduct.imageAlt,
+      title: "Imagen del producto",
+      aspectRatio: "9 / 11",
+    });
+
+  const openLabel = () =>
+    setLightbox({
+      src: productNutrition.labelImage,
+      alt: productNutrition.labelImageAlt,
+      title: "Información nutricional — etiqueta",
+      aspectRatio: "17.5 / 18.5",
+    });
 
   return (
     <>
@@ -105,12 +195,12 @@ export function ProductPanel() {
         </ol>
       </nav>
 
-      <section id="productos" className="bg-background">
+      <section id="productos" className="bg-white">
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-12 lg:grid-cols-2 lg:items-start lg:py-16">
           <button
             type="button"
-            className="group relative flex cursor-zoom-in justify-center border border-line bg-white p-4 shadow-sm lg:cursor-zoom-in"
-            onClick={() => setImageOpen(true)}
+            className="group relative flex cursor-zoom-in justify-center border border-line bg-white p-4 shadow-sm"
+            onClick={openProduct}
             aria-label="Ampliar imagen del producto"
           >
             <Image
@@ -125,7 +215,7 @@ export function ProductPanel() {
           </button>
 
           <div className="min-w-0">
-            <h1 className="font-display text-xl leading-snug text-olive uppercase tracking-wide sm:text-2xl">
+            <h1 className="font-display text-xl leading-snug tracking-wide text-olive uppercase sm:text-2xl">
               {catalogProduct.title}
             </h1>
 
@@ -153,19 +243,18 @@ export function ProductPanel() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/salud"
+              <a
+                href="#informacion-nutricional"
                 className="border border-olive bg-olive px-6 py-3 text-[11px] font-medium tracking-[0.2em] text-paper uppercase transition-colors duration-300 hover:bg-olive/90"
               >
                 Información nutricional
-              </Link>
-              <button
-                type="button"
-                onClick={() => setContactOpen(true)}
+              </a>
+              <Link
+                href="/salud"
                 className="border border-olive bg-transparent px-6 py-3 text-[11px] font-medium tracking-[0.2em] text-olive uppercase transition-colors duration-300 hover:bg-olive hover:text-paper"
               >
-                Solicitar información
-              </button>
+                Beneficios para la salud
+              </Link>
             </div>
 
             <h2 className="mt-14 font-display text-2xl text-olive">Detalle del producto</h2>
@@ -181,29 +270,49 @@ export function ProductPanel() {
         </div>
       </section>
 
-      <ProductImageLightbox open={imageOpen} onClose={() => setImageOpen(false)} />
-
-      {contactOpen ? (
-        <div
-          className="fixed inset-0 z-50 grid place-items-center bg-ink/60 p-4 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="max-h-[90vh] w-full max-w-lg overflow-auto border border-line bg-paper p-8 shadow-2xl">
-            <div className="flex items-start justify-between gap-4">
-              <h2 className="font-display text-3xl text-olive uppercase">Solicitar información</h2>
-              <button
-                type="button"
-                onClick={() => setContactOpen(false)}
-                className="text-[12px] tracking-[0.16em] text-ink/60 uppercase transition-colors hover:text-olive"
-              >
-                Cerrar
-              </button>
-            </div>
-            <ContactForm productLine="Aceite de Oliva Don Santino" className="mt-8" />
+      <section
+        id="informacion-nutricional"
+        className="scroll-mt-28 border-t border-line bg-white"
+      >
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-xs font-bold tracking-[0.3em] text-gold uppercase">Etiqueta</p>
+            <h2 className="mt-3 font-display text-3xl text-olive uppercase sm:text-4xl">Información nutricional</h2>
+            <div className="mx-auto mt-4 h-px w-16 bg-gold" aria-hidden />
+            <p className="mt-6 font-sans text-base text-ink/70">
+              Porción: <strong className="font-medium text-olive">{productNutrition.servingSize}</strong>.{" "}
+              {productNutrition.servingsPerContainer}.
+            </p>
+            <p className="mt-3 font-sans text-sm text-ink/65">
+              <strong className="text-olive">Ingredientes:</strong> {productNutrition.ingredients}{" "}
+              <strong className="text-olive">Conservación:</strong> {productNutrition.storage}
+            </p>
           </div>
+
+          <button
+            type="button"
+            onClick={openLabel}
+            className="group mx-auto mt-10 block max-w-2xl cursor-zoom-in border border-line bg-white p-3 shadow-sm transition-shadow hover:shadow-md"
+            aria-label="Ampliar etiqueta e información nutricional"
+          >
+            <div className="relative aspect-[17.5/18.5] w-full overflow-hidden">
+              <Image
+                src={productNutrition.labelImage}
+                alt={productNutrition.labelImageAlt}
+                fill
+                className="object-contain p-2 transition-opacity duration-300 group-hover:opacity-95"
+                sizes="(max-width: 1024px) 100vw, 672px"
+              />
+              <span className="pointer-events-none absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/5" />
+            </div>
+            <p className="mt-3 font-sans text-xs tracking-wide text-ink/55">
+              Clic para ampliar · usa + / − o la rueda del mouse para zoom
+            </p>
+          </button>
         </div>
-      ) : null}
+      </section>
+
+      <ImageZoomLightbox payload={lightbox} onClose={() => setLightbox(null)} />
     </>
   );
 }

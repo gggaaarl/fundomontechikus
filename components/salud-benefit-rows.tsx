@@ -11,7 +11,7 @@ function BenefitImage({ src, alt }: { src: string; alt: string }) {
 
 function BenefitText({ title, description }: { title: string; description: string }) {
   return (
-    <div className="flex min-h-[240px] w-full flex-col items-center justify-center bg-[#fdf7f0] px-8 py-14 text-center lg:min-h-[min(36vw,440px)] lg:px-12">
+    <div className="flex min-h-[240px] w-full flex-col items-center justify-center bg-salud-cream px-8 py-14 text-center lg:min-h-[min(36vw,440px)] lg:px-12">
       <h2 className="font-display text-2xl tracking-wide text-ink uppercase sm:text-3xl lg:text-[2rem]">
         {title}
       </h2>

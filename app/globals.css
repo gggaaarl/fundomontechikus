@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf6f5;
+  --background: #ffffff;
   --foreground: #1c1a17;
   --ink: #1c1a17;
   --olive: #2c3424;
   --gold: #b89a62;
-  --paper: #faf6f5;
+  --paper: #ffffff;
   --line: #e4ddd2;
+  /** Celdas crema solo en grid Salud (referencia El Olivar) */
+  --salud-cream: #fdf7f0;
 }
 
 @theme inline {
@@ -18,6 +20,7 @@
   --color-gold: var(--gold);
   --color-paper: var(--paper);
   --color-line: var(--line);
+  --color-salud-cream: var(--salud-cream);
   --font-sans: var(--font-outfit);
   --font-display: var(--font-bodoni);
 }
